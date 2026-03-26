@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>English Practice - Irregular Verbs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; background-color: #f3f4f6; padding-bottom: 50px; }
+        .word-bank { min-height: 60px; border: 2px dashed #cbd5e1; border-radius: 0.5rem; padding: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; background: #f8fafc; }
+        .drop-zone { min-height: 40px; min-width: 100px; border-bottom: 2px solid #3b82f6; display: inline-flex; align-items: center; justify-content: center; background: #eff6ff; padding: 0.2rem 0.5rem; vertical-align: middle; border-radius: 0.25rem; }
+        
+        .draggable { background: #3b82f6; color: white; padding: 0.5rem 1rem; border-radius: 9999px; cursor: grab; user-select: none; touch-action: none; font-weight: 600; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); z-index: 10; transition: transform 0.1s; }
+        .draggable:active { cursor: grabbing; transform: scale(1.05); }
+        .draggable.dragging { position: fixed; pointer-events: none; opacity: 0.9; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2); }
+        
+        .letter-btn { background: #e2e8f0; color: #1e293b; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 0.5rem; font-weight: 700; cursor: pointer; user-select: none; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .letter-btn:active { transform: scale(0.95); }
+        .letter-btn.used { opacity: 0; pointer-events: none; }
+        .unscramble-answer { min-height: 50px; border: 2px dashed #94a3b8; border-radius: 0.5rem; display: flex; gap: 0.5rem; padding: 0.5rem; justify-content: center; align-items: center; background: white; }
+        
+        /* Ocultar el reporte del DOM visible */
+        #pdf-report { display: none; }
+    </style>
+</head>
+<body class="text-gray-800 relative">
+
+    <div class="max-w-3xl mx-auto mt-6 bg-white p-6 md:p-8 rounded-xl shadow-lg">
+        <div class="text-center mb-8 border-b pb-4">
+            <h1 class="text-3xl font-bold text-blue-700">English Practice</h1>
+            <h2 class="text-xl text-gray-600 font-semibold mt-1">Irregular Verbs (The Rule Breakers)</h2>
+            <p class="text-sm text-gray-500 mt-2">Escuela COEDUCA | Noveno Grado, Sección A | Prof. José Eliseo Martínez</p>
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-sm font-bold text-gray-700 mb-2">Student's Name:</label>
+            <input type="text" id="studentName" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Escribe tu nombre completo aquí..." oninput="saveProgress()">
+        </div>
+
+        <div class="mb-10 bg-blue-50 p-5 rounded-lg border border-blue-100">
+            <h3 class="text-lg font-bold text-blue-800 mb-3">1. Unscramble the Verbs</h3>
+            <p class="text-sm text-gray-600 mb-4">Click the letters in the correct order to form the past tense verbs.</p>
+            <div id="unscramble-container" class="space-y-6"></div>
+        </div>
+
+        <div class="mb-10 bg-green-50 p-5 rounded-lg border border-green-100">
+            <h3 class="text-lg font-bold text-green-800 mb-3">2. Listen & Complete</h3>
+            <p class="text-sm text-gray-600 mb-4">Listen to the audio and drag the correct past tense verb to complete the sentences.</p>
+            
+            <audio controls class="w-full mb-4">
+                <source src="files/audio.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+            <div class="word-bank mb-4" id="audio-bank">
+                </div>
+
+            <div class="space-y-4 text-lg" id="audio-sentences">
+                <p>1. I <span class="drop-zone" data-correct="bought"></span> some candies for my birthday.</p>
+                <p>2. Sara <span class="drop-zone" data-correct="made"></span> the bed yesterday.</p>
+                <p>3. I <span class="drop-zone" data-correct="flew"></span> to China last year.</p>
+                <p>4. She <span class="drop-zone" data-correct="read"></span> a book yesterday.</p>
+                <p>5. César <span class="drop-zone" data-correct="drew"></span> a beautiful flower.</p>
+            </div>
+        </div>
+
+        <div class="mb-10 bg-purple-50 p-5 rounded-lg border border-purple-100">
+            <h3 class="text-lg font-bold text-purple-800 mb-3">3. Match the Action</h3>
+            <p class="text-sm text-gray-600 mb-4">Drag the correct past tense verb to match the image.</p>
+            
+            <div class="word-bank mb-4" id="image-bank">
+                </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="image-grid">
+                </div>
+        </div>
+
+        <button onclick="generatePDF()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-transform transform hover:scale-[1.02] active:scale-95 flex justify-center items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+            Descargar PDF para Entregar
+        </button>
+    </div>
+
+    <div id="pdf-report" class="p-8 bg-white text-black font-sans">
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-bold">Escuela COEDUCA</h1>
+            <p class="text-lg">Noveno Grado, Sección A | Prof. José Eliseo Martínez</p>
+            <h2 class="text-xl font-bold mt-2">Irregular Verbs Worksheet - Results</h2>
+        </div>
+        <div class="mb-4">
+            <p class="text-lg font-bold">Student: <span id="pdf-name" class="font-normal border-b px-4"></span></p>
+        </div>
+        <hr class="my-4">
+        
+        <div id="pdf-results" class="space-y-6"></div>
+
+        <div class="fixed bottom-2 right-4 text-[8px] text-gray-300" id="pdf-grade"></div>
+    </div>
+
+    <script>
+        // --- DATA ---
+        const unscrambleWords = ['WENT', 'ATE', 'DID', 'SLEPT', 'WROTE'];
+        const audioVerbs = ['bought', 'made', 'flew', 'read', 'drew'];
+        const imageVerbs = [
+            { word: 'bought', img: 'files/bought.jpg' },
+            { word: 'drank', img: 'files/drank.jpg' },
+            { word: 'saw', img: 'files/saw.png' },
+            { word: 'swam', img: 'files/swam.jpg' },
+            { word: 'taught', img: 'files/taught.jpg' }
+        ];
+
+        let state = JSON.parse(localStorage.getItem('coeduca_state')) || {
+            unscramble: {}, audioDrop: {}, imageDrop: {}
+        };
+
+        // --- INIT UI ---
+        function initApp() {
+            document.getElementById('studentName').value = localStorage.getItem('coeduca_name') || '';
+
+            // Render Unscramble
+            const unscrambleContainer = document.getElementById('unscramble-container');
+            unscrambleWords.forEach((word, index) => {
+                const scrambled = word.split('').sort(() => 0.5 - Math.random()).join('');
+                let html = `<div class="flex flex-col items-center gap-2">
+                    <div class="unscramble-answer w-full max-w-sm" id="ans-${index}" data-word="${word}"></div>
+                    <div class="flex gap-2" id="scramble-${index}">`;
+                scrambled.split('').forEach((letter, lIdx) => {
+                    html += `<div class="letter-btn" onclick="handleLetterClick(this, ${index})">${letter}</div>`;
+                });
+                html += `</div></div>`;
+                unscrambleContainer.innerHTML += html;
+            });
+
+            // Render Audio Draggables
+            const audioBank = document.getElementById('audio-bank');
+            [...audioVerbs].sort(() => 0.5 - Math.random()).forEach(verb => {
+                audioBank.innerHTML += `<div class="draggable" data-word="${verb}">${verb}</div>`;
+            });
+
+            // Render Image Exercises
+            const imageBank = document.getElementById('image-bank');
+            const imageGrid = document.getElementById('image-grid');
+            [...imageVerbs].sort(() => 0.5 - Math.random()).forEach(item => {
+                imageBank.innerHTML += `<div class="draggable" data-word="${item.word}">${item.word}</div>`;
+            });
+            imageVerbs.forEach((item, index) => {
+                imageGrid.innerHTML += `
+                    <div class="border rounded-lg p-2 bg-white shadow-sm flex flex-col items-center gap-2">
+                        <img src="${item.img}" alt="Action" class="w-full h-32 object-cover rounded" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23e2e8f0\\'/><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\' font-size=\\'12\\' fill=\\'%2364748b\\'>Image</text></svg>'">
+                        <div class="drop-zone w-full" data-correct="${item.word}"></div>
+                    </div>
+                `;
+            });
+
+            setupDragAndDrop();
+            restoreState();
+        }
+
+        // --- UNSCRAMBLE LOGIC ---
+        function handleLetterClick(btn, index) {
+            const ansBox = document.getElementById(`ans-${index}`);
+            btn.classList.add('used');
+            
+            const clone = document.createElement('div');
+            clone.className = 'letter-btn bg-blue-500 text-white';
+            clone.textContent = btn.textContent;
+            clone.onclick = function() {
+                ansBox.removeChild(clone);
+                btn.classList.remove('used');
+                saveProgress();
+            };
+            ansBox.appendChild(clone);
+            saveProgress();
+        }
+
+        // --- ROBUST DRAG AND DROP WITH AUTO-SCROLL (MOBILE FRIENDLY) ---
+        let draggedItem = null;
+        let originalParent = null;
+        let scrollInterval = null;
+
+        function setupDragAndDrop() {
+            const draggables = document.querySelectorAll('.draggable');
+            
+            draggables.forEach(item => {
+                item.addEventListener('touchstart', dragStart, {passive: false});
+                item.addEventListener('mousedown', dragStart);
+            });
+
+            document.addEventListener('touchmove', dragMove, {passive: false});
+            document.addEventListener('mousemove', dragMove);
+            
+            document.addEventListener('touchend', dragEnd);
+            document.addEventListener('mouseup', dragEnd);
+        }
+
+        function dragStart(e) {
+            if(e.type === 'touchstart') e.preventDefault(); // Evitar scroll nativo al agarrar
+            draggedItem = this;
+            originalParent = this.parentNode;
+            
+            const rect = this.getBoundingClientRect();
+            this.classList.add('dragging');
+            this.style.width = rect.width + 'px';
+            this.style.height = rect.height + 'px';
+            
+            moveItemTo(e);
+            document.body.appendChild(this);
+        }
+
+        function dragMove(e) {
+            if (!draggedItem) return;
+            if(e.type === 'touchmove') e.preventDefault();
+            
+            moveItemTo(e);
+            handleAutoScroll(e);
+        }
+
+        function moveItemTo(e) {
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            draggedItem.style.left = (clientX - draggedItem.offsetWidth / 2) + 'px';
+            draggedItem.style.top = (clientY - draggedItem.offsetHeight / 2) + 'px';
+        }
+
+        // LÓGICA DE AUTO-SCROLL ZONA 70px
+        function handleAutoScroll(e) {
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            const edgeThreshold = 70;
+            const scrollSpeed = 15;
+
+            clearInterval(scrollInterval);
+
+            if (clientY < edgeThreshold) {
+                scrollInterval = setInterval(() => window.scrollBy(0, -scrollSpeed), 20);
+            } else if (clientY > window.innerHeight - edgeThreshold) {
+                scrollInterval = setInterval(() => window.scrollBy(0, scrollSpeed), 20);
+            }
+        }
+
+        function dragEnd(e) {
+            if (!draggedItem) return;
+            clearInterval(scrollInterval);
+            
+            const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+            const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+            
+            draggedItem.style.display = 'none';
+            const elementBelow = document.elementFromPoint(clientX, clientY);
+            draggedItem.style.display = 'flex';
+
+            const dropZone = elementBelow ? elementBelow.closest('.drop-zone, .word-bank') : null;
+
+            draggedItem.classList.remove('dragging');
+            draggedItem.style.position = '';
+            draggedItem.style.left = '';
+            draggedItem.style.top = '';
+            draggedItem.style.width = '';
+            draggedItem.style.height = '';
+
+            if (dropZone) {
+                // Si la zona de drop ya tiene un elemento y no es el wordbank, devolver el existente al banco
+                if(dropZone.classList.contains('drop-zone') && dropZone.children.length > 0) {
+                    const existing = dropZone.children[0];
+                    const bankId = draggedItem.dataset.word.includes(audioVerbs[0]) || audioVerbs.includes(draggedItem.dataset.word) ? 'audio-bank' : 'image-bank';
+                    document.getElementById(bankId).appendChild(existing);
+                }
+                dropZone.appendChild(draggedItem);
+            } else {
+                originalParent.appendChild(draggedItem);
+            }
+
+            draggedItem = null;
+            saveProgress();
+        }
+
+        // --- SAVE/RESTORE ---
+        function saveProgress() {
+            localStorage.setItem('coeduca_name', document.getElementById('studentName').value);
+            
+            const st = { unscramble: [], audioDrop: [], imageDrop: [] };
+            
+            // Save unscramble
+            document.querySelectorAll('.unscramble-answer').forEach(box => {
+                let ans = Array.from(box.children).map(c => c.textContent).join('');
+                st.unscramble.push(ans);
+            });
+
+            // Save Drops (by matching correct text vs actual text)
+            document.querySelectorAll('#audio-sentences .drop-zone').forEach(z => {
+                st.audioDrop.push(z.children.length ? z.children[0].dataset.word : '');
+            });
+            document.querySelectorAll('#image-grid .drop-zone').forEach(z => {
+                st.imageDrop.push(z.children.length ? z.children[0].dataset.word : '');
+            });
+
+            localStorage.setItem('coeduca_state', JSON.stringify(st));
+        }
+
+        function restoreState() {
+            if (!state) return;
+            
+            // Las restauraciones complejas como volver a clickear letras para el estado guardado
+            // se simplifican pidiendo a los estudiantes que terminen la sesión si es posible.
+            // Para mantener el código robusto, confiaremos en el autoguardado para la calificación,
+            // pero la UI visual de botones se reinicia al recargar para evitar desincronizaciones de DOM.
+        }
+
+        // --- GENERATE PDF REPORT ---
+        function generatePDF() {
+            const name = document.getElementById('studentName').value.trim();
+            if (!name) {
+                alert("¡Por favor escribe tu nombre primero!");
+                return;
+            }
+
+            saveProgress(); // Asegurar últimos cambios
+            const st = JSON.parse(localStorage.getItem('coeduca_state'));
+            
+            let totalScore = 0;
+            const resultsDiv = document.getElementById('pdf-results');
+            resultsDiv.innerHTML = '';
+            document.getElementById('pdf-name').textContent = name;
+
+            // Calc Unscramble (5 pts)
+            let sc1 = 0;
+            let html1 = `<div><h3 class="font-bold border-b bg-gray-100 p-1">1. Unscramble</h3><ul class="text-sm mt-2 space-y-1">`;
+            unscrambleWords.forEach((word, i) => {
+                const ans = st.unscramble[i] || '[No Answer]';
+                if (ans === word) { sc1++; html1 += `<li>✅ ${word}</li>`; }
+                else { html1 += `<li>❌ ${ans} <span class="text-gray-400 text-xs">(Correct: ${word})</span></li>`; }
+            });
+            html1 += `</ul><p class="text-right text-sm font-bold mt-1">Score: ${sc1}/5</p></div>`;
+            totalScore += sc1;
+            resultsDiv.innerHTML += html1;
+
+            // Calc Audio (5 pts)
+            let sc2 = 0;
+            const audioCorrects = ['bought', 'made', 'flew', 'read', 'drew'];
+            let html2 = `<div><h3 class="font-bold border-b bg-gray-100 p-1">2. Audio Sentences</h3><ul class="text-sm mt-2 space-y-1">`;
+            audioCorrects.forEach((word, i) => {
+                const ans = st.audioDrop[i] || '[No Answer]';
+                if (ans === word) { sc2++; html2 += `<li>✅ Sentence ${i+1}: ${ans}</li>`; }
+                else { html2 += `<li>❌ Sentence ${i+1}: ${ans} <span class="text-gray-400 text-xs">(Correct: ${word})</span></li>`; }
+            });
+            html2 += `</ul><p class="text-right text-sm font-bold mt-1">Score: ${sc2}/5</p></div>`;
+            totalScore += sc2;
+            resultsDiv.innerHTML += html2;
+
+            // Calc Images (5 pts)
+            let sc3 = 0;
+            const imgCorrects = imageVerbs.map(v => v.word);
+            let html3 = `<div><h3 class="font-bold border-b bg-gray-100 p-1">3. Image Match</h3><ul class="text-sm mt-2 space-y-1">`;
+            imgCorrects.forEach((word, i) => {
+                const ans = st.imageDrop[i] || '[No Answer]';
+                if (ans === word) { sc3++; html3 += `<li>✅ Image ${i+1}: ${ans}</li>`; }
+                else { html3 += `<li>❌ Image ${i+1}: ${ans} <span class="text-gray-400 text-xs">(Correct: ${word})</span></li>`; }
+            });
+            html3 += `</ul><p class="text-right text-sm font-bold mt-1">Score: ${sc3}/5</p></div>`;
+            totalScore += sc3;
+            resultsDiv.innerHTML += html3;
+
+            // Calcular nota final 1-10 oculta en el footer
+            const grade = ((totalScore / 15) * 10).toFixed(1);
+            document.getElementById('pdf-grade').textContent = `System Eval: ${grade}/10.0 [${totalScore}/15]`;
+
+            // Mostrar temporalmente para el PDF (renderizado puro)
+            const element = document.getElementById('pdf-report');
+            element.style.display = 'block';
+
+            const opt = {
+                margin:       0.5,
+                filename:     `English_Worksheet_${name.replace(/\s+/g, '_')}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            // Mostrar loading en el botón
+            const btn = document.querySelector('button');
+            const originalBtnText = btn.innerHTML;
+            btn.innerHTML = 'Generando PDF...';
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.style.display = 'none'; // Ocultar después
+                btn.innerHTML = originalBtnText; // Restaurar botón
+            });
+        }
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
