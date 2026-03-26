@@ -1,394 +1,820 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>English Practice - Irregular Verbs</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-        body { font-family: 'Poppins', sans-serif; background-color: #f3f4f6; padding-bottom: 50px; }
-        .word-bank { min-height: 60px; border: 2px dashed #cbd5e1; border-radius: 0.5rem; padding: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; background: #f8fafc; }
-        .drop-zone { min-height: 40px; min-width: 100px; border-bottom: 2px solid #3b82f6; display: inline-flex; align-items: center; justify-content: center; background: #eff6ff; padding: 0.2rem 0.5rem; vertical-align: middle; border-radius: 0.25rem; }
-        
-        .draggable { background: #3b82f6; color: white; padding: 0.5rem 1rem; border-radius: 9999px; cursor: grab; user-select: none; touch-action: none; font-weight: 600; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); z-index: 10; transition: transform 0.1s; }
-        .draggable:active { cursor: grabbing; transform: scale(1.05); }
-        .draggable.dragging { position: fixed; pointer-events: none; opacity: 0.9; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2); }
-        
-        .letter-btn { background: #e2e8f0; color: #1e293b; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 0.5rem; font-weight: 700; cursor: pointer; user-select: none; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .letter-btn:active { transform: scale(0.95); }
-        .letter-btn.used { opacity: 0; pointer-events: none; }
-        .unscramble-answer { min-height: 50px; border: 2px dashed #94a3b8; border-radius: 0.5rem; display: flex; gap: 0.5rem; padding: 0.5rem; justify-content: center; align-items: center; background: white; }
-        
-        /* Ocultar el reporte del DOM visible */
-        #pdf-report { display: none; }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Irregular Verbs – English A1+ · 9th Grade · COEDUCA</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{
+  --or:#E8761A;--or2:#F5A94E;--nav:#1A2744;--nav2:#253561;--teal:#2ABFBF;
+  --cream:#FFF8F0;--white:#fff;--gr:#6B7280;--lgr:#F3F4F6;
+  --ok:#22C55E;--err:#EF4444;--shad:0 4px 20px rgba(26,39,68,.12);--rad:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--nav);min-height:100vh;}
+
+/* ── HEADER ─────────────────────────────────────────── */
+.site-hd{background:linear-gradient(135deg,var(--nav),var(--nav2));padding:20px 20px 14px;color:#fff;position:relative;overflow:hidden;}
+.site-hd::before,.site-hd::after{content:'';position:absolute;border-radius:50%;opacity:.12;}
+.site-hd::before{width:220px;height:220px;background:var(--or);top:-70px;right:-50px;}
+.site-hd::after{width:120px;height:120px;background:var(--teal);bottom:-60px;left:30px;}
+.hd-inner{max-width:900px;margin:0 auto;position:relative;z-index:1;}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--or);color:#fff;padding:3px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.hd-title{font-family:'Sora',sans-serif;font-size:clamp(19px,4vw,28px);font-weight:800;line-height:1.2;}
+.hd-title span{color:var(--or2);}
+.hd-meta{margin-top:7px;font-size:12px;opacity:.8;display:flex;flex-wrap:wrap;gap:12px;}
+.prog-wrap{background:rgba(255,255,255,.15);height:5px;border-radius:3px;margin-top:14px;overflow:hidden;}
+.prog-fill{height:100%;background:var(--or2);border-radius:3px;transition:width .5s ease;}
+
+/* ── LAYOUT ──────────────────────────────────────────── */
+main{max-width:900px;margin:0 auto;padding:22px 14px 70px;}
+
+/* ── STUDENT CARD ────────────────────────────────────── */
+.std-card{background:#fff;border-radius:var(--rad);padding:22px;box-shadow:var(--shad);margin-bottom:28px;border-left:4px solid var(--or);}
+.std-card h2{font-family:'Sora',sans-serif;font-size:15px;margin-bottom:14px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:460px){.frow{grid-template-columns:1fr;}}
+.fg label{display:block;font-size:11px;font-weight:700;color:var(--gr);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
+.fg input{width:100%;padding:9px 12px;border:2px solid #E5E7EB;border-radius:10px;font-family:'Nunito',sans-serif;font-size:15px;color:var(--nav);transition:border-color .2s;outline:none;}
+.fg input:focus{border-color:var(--or);}
+
+/* ── SECTION CARD ────────────────────────────────────── */
+.sec{background:#fff;border-radius:var(--rad);box-shadow:var(--shad);margin-bottom:28px;overflow:hidden;}
+.sec-hd{background:linear-gradient(135deg,var(--or),var(--or2));padding:16px 22px;color:#fff;display:flex;align-items:center;gap:14px;}
+.sec-num{background:rgba(255,255,255,.25);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:15px;flex-shrink:0;}
+.sec-t{font-family:'Sora',sans-serif;font-weight:700;font-size:15px;line-height:1.3;}
+.sec-sub{font-size:11px;opacity:.85;margin-top:2px;}
+.sec-body{padding:22px;}
+
+/* ── INSTRUCTION BOX ─────────────────────────────────── */
+.instr{background:linear-gradient(135deg,rgba(42,191,191,.08),rgba(232,118,26,.06));border-left:4px solid var(--teal);border-radius:0 10px 10px 0;padding:11px 14px;margin-bottom:18px;font-size:13.5px;}
+.instr strong{color:var(--or);}
+
+/* ── EX1 LETTER TILES ────────────────────────────────── */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;}
+.vcard{border:2px solid #E5E7EB;border-radius:12px;padding:14px;transition:border-color .25s,background .25s;}
+.vcard.correct{border-color:var(--ok);background:#F0FDF4;}
+.vcard.wrong{border-color:var(--err);background:#FEF2F2;}
+.vc-lbl{font-size:10px;font-weight:700;color:var(--gr);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.vc-base{font-size:17px;font-weight:800;margin-bottom:10px;}
+.vc-base span{color:var(--or);font-size:12px;font-weight:600;margin-left:4px;}
+.tiles-row{display:flex;flex-wrap:wrap;gap:5px;min-height:34px;}
+.ltile{width:30px;height:30px;background:var(--nav);color:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:transform .1s,background .15s;user-select:none;-webkit-user-select:none;}
+.ltile:hover{transform:scale(1.12);background:var(--or);}
+.ltile.used{opacity:.25;pointer-events:none;}
+.ans-row{display:flex;flex-wrap:wrap;gap:5px;min-height:34px;border-top:2px dashed #E5E7EB;padding-top:9px;margin-top:4px;}
+.atile{width:30px;height:30px;background:var(--teal);color:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;cursor:pointer;animation:popIn .18s ease;transition:transform .1s;}
+.atile:hover{transform:scale(1.12);}
+@keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.vfb{margin-top:7px;font-size:12px;font-weight:700;min-height:18px;}
+.vfb.ok{color:var(--ok);}
+.vfb.ng{color:var(--err);}
+
+/* ── BUTTONS ─────────────────────────────────────────── */
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:11px;font-family:'Nunito',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;border:none;transition:all .2s;}
+.btn-p{background:var(--or);color:#fff;box-shadow:0 4px 12px rgba(232,118,26,.28);}
+.btn-p:hover{background:var(--nav);transform:translateY(-2px);}
+.btn-s{background:var(--lgr);color:var(--nav);}
+.btn-s:hover{background:#E5E7EB;}
+.sc-badge{display:inline-flex;align-items:center;background:var(--lgr);padding:7px 14px;border-radius:20px;font-weight:700;font-size:13px;margin-left:4px;}
+
+/* ── AUDIO ───────────────────────────────────────────── */
+.audio-wrap{background:linear-gradient(135deg,var(--nav),var(--nav2));border-radius:12px;padding:18px;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:14px;}
+.play-btn{width:50px;height:50px;background:var(--or);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s,background .2s;}
+.play-btn:hover{transform:scale(1.1);background:var(--or2);}
+.audio-info p{font-size:12px;opacity:.75;margin-bottom:3px;}
+.audio-info strong{font-size:14px;font-family:'Sora',sans-serif;}
+audio{display:none;}
+.audio-progress{flex:1;height:4px;background:rgba(255,255,255,.2);border-radius:2px;margin-top:8px;overflow:hidden;}
+.audio-prog-fill{height:100%;background:var(--or2);border-radius:2px;transition:width .3s linear;width:0%;}
+
+/* ── WORDBANK ────────────────────────────────────────── */
+.wbank{border:2px dashed var(--teal);border-radius:12px;padding:14px;margin-bottom:18px;}
+.wbank.orange{border-color:var(--or);}
+.wbank-lbl{font-size:11px;font-weight:700;color:var(--gr);text-transform:uppercase;letter-spacing:.5px;margin-bottom:11px;}
+.wbank-items{display:flex;flex-wrap:wrap;gap:9px;min-height:40px;}
+.dword{background:var(--nav);color:#fff;padding:7px 15px;border-radius:8px;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;cursor:grab;user-select:none;-webkit-user-select:none;transition:transform .15s,box-shadow .15s,opacity .2s;touch-action:none;}
+.dword:active{cursor:grabbing;}
+.dword.dragging{opacity:.35;transform:scale(.92);}
+.dword.used{opacity:.28;pointer-events:none;}
+
+/* ── SENTENCES ───────────────────────────────────────── */
+.sent-list{display:flex;flex-direction:column;gap:11px;}
+.sent-item{background:#fff;border:2px solid #E5E7EB;border-radius:12px;padding:12px 15px;display:flex;align-items:center;flex-wrap:wrap;gap:7px;font-size:15.5px;font-weight:600;transition:border-color .25s,background .25s;}
+.sent-item.correct{border-color:var(--ok);background:#F0FDF4;}
+.sent-item.wrong{border-color:var(--err);background:#FEF2F2;}
+.s-num{font-size:12px;font-weight:800;color:var(--or);min-width:18px;}
+.dzone{display:inline-flex;align-items:center;justify-content:center;min-width:88px;height:34px;border:2px dashed var(--teal);border-radius:8px;padding:0 9px;font-family:'Sora',sans-serif;font-weight:700;font-size:13px;color:var(--teal);transition:all .2s;background:rgba(42,191,191,.05);cursor:default;}
+.dzone.over{background:rgba(42,191,191,.18);border-color:var(--or);color:var(--or);transform:scale(1.05);}
+.dzone.filled{background:var(--nav);color:#fff;border-style:solid;border-color:var(--nav);cursor:pointer;}
+.dzone.cf{background:var(--ok);color:#fff;border-color:var(--ok);}
+.dzone.nf{background:var(--err);color:#fff;border-color:var(--err);}
+
+/* ── IMAGE GRID ──────────────────────────────────────── */
+.imgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px;}
+.icard{border:2px solid #E5E7EB;border-radius:12px;overflow:hidden;transition:border-color .25s;}
+.icard.correct{border-color:var(--ok);}
+.icard.wrong{border-color:var(--err);}
+.icard img{width:100%;height:125px;object-fit:cover;display:block;background:#ddd;}
+.idrop{padding:9px;min-height:46px;display:flex;align-items:center;justify-content:center;border-top:2px dashed #E5E7EB;font-family:'Sora',sans-serif;font-weight:700;font-size:13px;color:var(--gr);transition:all .2s;text-align:center;}
+.idrop.over{background:rgba(42,191,191,.13);color:var(--teal);}
+.idrop.filled{background:var(--nav);color:#fff;border-color:var(--nav);cursor:pointer;}
+.idrop.cf{background:var(--ok);color:#fff;border-color:var(--ok);}
+.idrop.nf{background:var(--err);color:#fff;border-color:var(--err);}
+
+/* ── SUMMARY ─────────────────────────────────────────── */
+.summary{background:linear-gradient(135deg,var(--nav),var(--nav2));border-radius:var(--rad);padding:28px;color:#fff;text-align:center;margin-bottom:32px;}
+.summary h2{font-family:'Sora',sans-serif;font-size:21px;margin-bottom:5px;}
+.summary p{opacity:.75;font-size:13px;margin-bottom:22px;}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:22px;}
+@media(max-width:480px){.sgrid{grid-template-columns:1fr;}}
+.sitem{background:rgba(255,255,255,.1);border-radius:12px;padding:13px;}
+.sitem-lbl{font-size:11px;opacity:.7;margin-bottom:5px;line-height:1.4;}
+.sitem-val{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--or2);}
+.dl-btn{background:var(--or);color:#fff;padding:15px 30px;border-radius:13px;font-size:15px;font-weight:800;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:all .2s;box-shadow:0 6px 20px rgba(232,118,26,.4);}
+.dl-btn:hover{background:var(--or2);transform:translateY(-3px);}
+.dl-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+
+/* ── DRAG GHOST ──────────────────────────────────────── */
+#ghost{position:fixed;pointer-events:none;z-index:9999;background:var(--or);color:#fff;padding:7px 15px;border-radius:8px;font-family:'Sora',sans-serif;font-weight:700;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.28);transform:rotate(3deg);display:none;white-space:nowrap;}
+
+@media(max-width:560px){
+  .vgrid{grid-template-columns:1fr 1fr;}
+  .imgrid{grid-template-columns:repeat(2,1fr);}
+  .sec-body{padding:15px;}
+}
+</style>
 </head>
-<body class="text-gray-800 relative">
+<body>
 
-    <div class="max-w-3xl mx-auto mt-6 bg-white p-6 md:p-8 rounded-xl shadow-lg">
-        <div class="text-center mb-8 border-b pb-4">
-            <h1 class="text-3xl font-bold text-blue-700">English Practice</h1>
-            <h2 class="text-xl text-gray-600 font-semibold mt-1">Irregular Verbs (The Rule Breakers)</h2>
-            <p class="text-sm text-gray-500 mt-2">Escuela COEDUCA | Noveno Grado, Sección A | Prof. José Eliseo Martínez</p>
-        </div>
+<header class="site-hd">
+  <div class="hd-inner">
+    <div class="badge">🎓 COEDUCA · Sección A</div>
+    <h1 class="hd-title">Irregular Verbs <span>Worksheet</span></h1>
+    <div class="hd-meta">
+      <span>📚 English A1+ · 9th Grade</span>
+      <span>👨‍🏫 Prof. José Eliseo Martínez</span>
+      <span>✏️ Classes 2 &amp; 3</span>
+    </div>
+    <div class="prog-wrap"><div class="prog-fill" id="progBar" style="width:0%"></div></div>
+  </div>
+</header>
 
-        <div class="mb-6">
-            <label class="block text-sm font-bold text-gray-700 mb-2">Student's Name:</label>
-            <input type="text" id="studentName" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Escribe tu nombre completo aquí..." oninput="saveProgress()">
-        </div>
+<main>
+  <!-- Student Info -->
+  <div class="std-card">
+    <h2>📋 Student Information</h2>
+    <div class="frow">
+      <div class="fg"><label>Full Name</label><input id="sName" type="text" placeholder="Your full name…" oninput="save()"></div>
+      <div class="fg"><label>Date</label><input id="sDate" type="date" oninput="save()"></div>
+    </div>
+  </div>
 
-        <div class="mb-10 bg-blue-50 p-5 rounded-lg border border-blue-100">
-            <h3 class="text-lg font-bold text-blue-800 mb-3">1. Unscramble the Verbs</h3>
-            <p class="text-sm text-gray-600 mb-4">Click the letters in the correct order to form the past tense verbs.</p>
-            <div id="unscramble-container" class="space-y-6"></div>
-        </div>
+  <!-- Exercise 1 -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="sec-num">1</div>
+      <div>
+        <div class="sec-t">Unscramble the Irregular Verbs</div>
+        <div class="sec-sub">Click the scrambled letters in the correct order to form the past tense</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="instr"><strong>Instructions:</strong> Each box shows a base verb. Click the letters one by one in the correct order to spell its past tense. Click an answer letter to send it back.</div>
+      <div class="vgrid" id="vGrid"></div>
+      <div class="btns">
+        <button class="btn btn-p" onclick="checkEx1()">✓ Check Answers</button>
+        <button class="btn btn-s" onclick="resetEx1()">↺ Reset</button>
+        <span class="sc-badge" id="sc1">Score: –</span>
+      </div>
+    </div>
+  </div>
 
-        <div class="mb-10 bg-green-50 p-5 rounded-lg border border-green-100">
-            <h3 class="text-lg font-bold text-green-800 mb-3">2. Listen & Complete</h3>
-            <p class="text-sm text-gray-600 mb-4">Listen to the audio and drag the correct past tense verb to complete the sentences.</p>
-            
-            <audio controls class="w-full mb-4">
-                <source src="files/audio.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-
-            <div class="word-bank mb-4" id="audio-bank">
-                </div>
-
-            <div class="space-y-4 text-lg" id="audio-sentences">
-                <p>1. I <span class="drop-zone" data-correct="bought"></span> some candies for my birthday.</p>
-                <p>2. Sara <span class="drop-zone" data-correct="made"></span> the bed yesterday.</p>
-                <p>3. I <span class="drop-zone" data-correct="flew"></span> to China last year.</p>
-                <p>4. She <span class="drop-zone" data-correct="read"></span> a book yesterday.</p>
-                <p>5. César <span class="drop-zone" data-correct="drew"></span> a beautiful flower.</p>
-            </div>
-        </div>
-
-        <div class="mb-10 bg-purple-50 p-5 rounded-lg border border-purple-100">
-            <h3 class="text-lg font-bold text-purple-800 mb-3">3. Match the Action</h3>
-            <p class="text-sm text-gray-600 mb-4">Drag the correct past tense verb to match the image.</p>
-            
-            <div class="word-bank mb-4" id="image-bank">
-                </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="image-grid">
-                </div>
-        </div>
-
-        <button onclick="generatePDF()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-transform transform hover:scale-[1.02] active:scale-95 flex justify-center items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-            Descargar PDF para Entregar
+  <!-- Exercise 2 -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="sec-num">2</div>
+      <div>
+        <div class="sec-t">Listen &amp; Complete</div>
+        <div class="sec-sub">Drag the correct past tense verb to complete each sentence</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="instr"><strong>Instructions:</strong> Listen to the audio carefully, then drag each verb from the word bank to the matching sentence. Click a placed word to return it.</div>
+      <div class="audio-wrap">
+        <button class="play-btn" onclick="toggleAudio()" id="playBtn">
+          <svg id="playIco" width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="5,3 17,10 5,17"/></svg>
         </button>
-    </div>
-
-    <div id="pdf-report" class="p-8 bg-white text-black font-sans">
-        <div class="text-center mb-6">
-            <h1 class="text-2xl font-bold">Escuela COEDUCA</h1>
-            <p class="text-lg">Noveno Grado, Sección A | Prof. José Eliseo Martínez</p>
-            <h2 class="text-xl font-bold mt-2">Irregular Verbs Worksheet - Results</h2>
+        <div class="audio-info" style="flex:1;">
+          <p>Audio Track · 5 Sentences</p>
+          <strong>Listen carefully and fill in the blanks!</strong>
+          <div class="audio-progress"><div class="audio-prog-fill" id="apFill"></div></div>
         </div>
-        <div class="mb-4">
-            <p class="text-lg font-bold">Student: <span id="pdf-name" class="font-normal border-b px-4"></span></p>
-        </div>
-        <hr class="my-4">
-        
-        <div id="pdf-results" class="space-y-6"></div>
-
-        <div class="fixed bottom-2 right-4 text-[8px] text-gray-300" id="pdf-grade"></div>
+        <audio id="audioEl" src="files/audio.mp3" preload="metadata"></audio>
+      </div>
+      <div class="wbank" id="wb2">
+        <div class="wbank-lbl">📦 Word Bank – Drag these verbs:</div>
+        <div class="wbank-items" id="wbItems2"></div>
+      </div>
+      <div class="sent-list" id="sentList"></div>
+      <div class="btns">
+        <button class="btn btn-p" onclick="checkEx2()">✓ Check Answers</button>
+        <button class="btn btn-s" onclick="resetEx2()">↺ Reset</button>
+        <span class="sc-badge" id="sc2">Score: –</span>
+      </div>
     </div>
+  </div>
 
-    <script>
-        // --- DATA ---
-        const unscrambleWords = ['WENT', 'ATE', 'DID', 'SLEPT', 'WROTE'];
-        const audioVerbs = ['bought', 'made', 'flew', 'read', 'drew'];
-        const imageVerbs = [
-            { word: 'bought', img: 'files/bought.jpg' },
-            { word: 'drank', img: 'files/drank.jpg' },
-            { word: 'saw', img: 'files/saw.png' },
-            { word: 'swam', img: 'files/swam.jpg' },
-            { word: 'taught', img: 'files/taught.jpg' }
-        ];
+  <!-- Exercise 3 -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="sec-num">3</div>
+      <div>
+        <div class="sec-t">Match the Verb to the Image</div>
+        <div class="sec-sub">Drag each past tense verb to the image it matches</div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="instr"><strong>Instructions:</strong> Look at each image and drag the correct irregular past tense verb from the bank below to match it. Click a placed word to return it.</div>
+      <div class="wbank orange" id="wb3">
+        <div class="wbank-lbl">📦 Word Bank:</div>
+        <div class="wbank-items" id="wbItems3"></div>
+      </div>
+      <div class="imgrid" id="imgGrid"></div>
+      <div class="btns">
+        <button class="btn btn-p" onclick="checkEx3()">✓ Check Answers</button>
+        <button class="btn btn-s" onclick="resetEx3()">↺ Reset</button>
+        <span class="sc-badge" id="sc3">Score: –</span>
+      </div>
+    </div>
+  </div>
 
-        let state = JSON.parse(localStorage.getItem('coeduca_state')) || {
-            unscramble: {}, audioDrop: {}, imageDrop: {}
-        };
+  <!-- Summary -->
+  <div class="summary">
+    <h2>🏆 Your Results</h2>
+    <p>Check all exercises above to update your scores</p>
+    <div class="sgrid">
+      <div class="sitem"><div class="sitem-lbl">Exercise 1<br>Unscramble</div><div class="sitem-val" id="sum1">–/10</div></div>
+      <div class="sitem"><div class="sitem-lbl">Exercise 2<br>Listen &amp; Fill</div><div class="sitem-val" id="sum2">–/5</div></div>
+      <div class="sitem"><div class="sitem-lbl">Exercise 3<br>Image Match</div><div class="sitem-val" id="sum3">–/5</div></div>
+    </div>
+    <button class="dl-btn" onclick="genPDF()" id="dlBtn">📄 Download PDF</button>
+  </div>
+</main>
 
-        // --- INIT UI ---
-        function initApp() {
-            document.getElementById('studentName').value = localStorage.getItem('coeduca_name') || '';
+<div id="ghost"></div>
 
-            // Render Unscramble
-            const unscrambleContainer = document.getElementById('unscramble-container');
-            unscrambleWords.forEach((word, index) => {
-                const scrambled = word.split('').sort(() => 0.5 - Math.random()).join('');
-                let html = `<div class="flex flex-col items-center gap-2">
-                    <div class="unscramble-answer w-full max-w-sm" id="ans-${index}" data-word="${word}"></div>
-                    <div class="flex gap-2" id="scramble-${index}">`;
-                scrambled.split('').forEach((letter, lIdx) => {
-                    html += `<div class="letter-btn" onclick="handleLetterClick(this, ${index})">${letter}</div>`;
-                });
-                html += `</div></div>`;
-                unscrambleContainer.innerHTML += html;
-            });
+<script>
+// ═══════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════
+const VERBS = [
+  {base:'GO',   past:'WENT'},
+  {base:'EAT',  past:'ATE'},
+  {base:'HAVE', past:'HAD'},
+  {base:'DO',   past:'DID'},
+  {base:'GET',  past:'GOT'},
+  {base:'SLEEP',past:'SLEPT'},
+  {base:'DRINK',past:'DRANK'},
+  {base:'WRITE',past:'WROTE'},
+  {base:'BUY',  past:'BOUGHT'},
+  {base:'FLY',  past:'FLEW'}
+];
 
-            // Render Audio Draggables
-            const audioBank = document.getElementById('audio-bank');
-            [...audioVerbs].sort(() => 0.5 - Math.random()).forEach(verb => {
-                audioBank.innerHTML += `<div class="draggable" data-word="${verb}">${verb}</div>`;
-            });
+const SENTENCES = [
+  {before:'I',     after:'some candies for my birthday.',answer:'bought'},
+  {before:'Sara',  after:'the bed yesterday.',           answer:'made'},
+  {before:'I',     after:'to China last year.',          answer:'flew'},
+  {before:'She',   after:'a book yesterday.',            answer:'read'},
+  {before:'César', after:'a beautiful flower.',          answer:'drew'}
+];
+const WORDS2 = ['bought','made','flew','read','drew'];
 
-            // Render Image Exercises
-            const imageBank = document.getElementById('image-bank');
-            const imageGrid = document.getElementById('image-grid');
-            [...imageVerbs].sort(() => 0.5 - Math.random()).forEach(item => {
-                imageBank.innerHTML += `<div class="draggable" data-word="${item.word}">${item.word}</div>`;
-            });
-            imageVerbs.forEach((item, index) => {
-                imageGrid.innerHTML += `
-                    <div class="border rounded-lg p-2 bg-white shadow-sm flex flex-col items-center gap-2">
-                        <img src="${item.img}" alt="Action" class="w-full h-32 object-cover rounded" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23e2e8f0\\'/><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\' font-size=\\'12\\' fill=\\'%2364748b\\'>Image</text></svg>'">
-                        <div class="drop-zone w-full" data-correct="${item.word}"></div>
-                    </div>
-                `;
-            });
+const IMAGES = [
+  {img:'files/bought.jpg', answer:'bought'},
+  {img:'files/drank.jpg',  answer:'drank'},
+  {img:'files/saw.png',    answer:'saw'},
+  {img:'files/swam.jpg',   answer:'swam'},
+  {img:'files/taught.jpg', answer:'taught'}
+];
+const WORDS3 = ['bought','drank','saw','swam','taught'];
 
-            setupDragAndDrop();
-            restoreState();
-        }
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+let sc = {};   // {vi: [li...]}  — letter indices chosen
+let ss = {};   // {vi: ['S','C','R',...]} — shuffled letters
+let a2 = {};   // {si: word}
+let a3 = {};   // {ii: word}
+let s1=null,s2=null,s3=null;
 
-        // --- UNSCRAMBLE LOGIC ---
-        function handleLetterClick(btn, index) {
-            const ansBox = document.getElementById(`ans-${index}`);
-            btn.classList.add('used');
-            
-            const clone = document.createElement('div');
-            clone.className = 'letter-btn bg-blue-500 text-white';
-            clone.textContent = btn.textContent;
-            clone.onclick = function() {
-                ansBox.removeChild(clone);
-                btn.classList.remove('used');
-                saveProgress();
-            };
-            ansBox.appendChild(clone);
-            saveProgress();
-        }
+// ═══════════════════════════════════════════════════════
+// PERSIST
+// ═══════════════════════════════════════════════════════
+function save(){
+  localStorage.setItem('irv9',JSON.stringify({
+    name:document.getElementById('sName').value,
+    date:document.getElementById('sDate').value,
+    sc,ss,a2,a3,s1,s2,s3
+  }));
+}
+function load(){
+  try{
+    const d=JSON.parse(localStorage.getItem('irv9')||'{}');
+    if(d.name) document.getElementById('sName').value=d.name;
+    if(d.date) document.getElementById('sDate').value=d.date;
+    if(d.sc)sc=d.sc; if(d.ss)ss=d.ss;
+    if(d.a2)a2=d.a2; if(d.a3)a3=d.a3;
+    if(d.s1!==undefined)s1=d.s1;
+    if(d.s2!==undefined)s2=d.s2;
+    if(d.s3!==undefined)s3=d.s3;
+  }catch(e){}
+}
 
-        // --- ROBUST DRAG AND DROP WITH AUTO-SCROLL (MOBILE FRIENDLY) ---
-        let draggedItem = null;
-        let originalParent = null;
-        let scrollInterval = null;
+function prog(){
+  let tot=VERBS.length+SENTENCES.length+IMAGES.length,done=0;
+  VERBS.forEach((_,i)=>{if((sc[i]||[]).length===VERBS[i].past.length)done++;});
+  SENTENCES.forEach((_,i)=>{if(a2[i])done++;});
+  IMAGES.forEach((_,i)=>{if(a3[i])done++;});
+  document.getElementById('progBar').style.width=Math.round(done/tot*100)+'%';
+}
 
-        function setupDragAndDrop() {
-            const draggables = document.querySelectorAll('.draggable');
-            
-            draggables.forEach(item => {
-                item.addEventListener('touchstart', dragStart, {passive: false});
-                item.addEventListener('mousedown', dragStart);
-            });
+function summ(){
+  document.getElementById('sum1').textContent = s1!==null?`${s1}/${VERBS.length}`:'–/10';
+  document.getElementById('sum2').textContent = s2!==null?`${s2}/${SENTENCES.length}`:'–/5';
+  document.getElementById('sum3').textContent = s3!==null?`${s3}/${IMAGES.length}`:'–/5';
+}
 
-            document.addEventListener('touchmove', dragMove, {passive: false});
-            document.addEventListener('mousemove', dragMove);
-            
-            document.addEventListener('touchend', dragEnd);
-            document.addEventListener('mouseup', dragEnd);
-        }
+// ═══════════════════════════════════════════════════════
+// EXERCISE 1 — LETTER ORDERING
+// ═══════════════════════════════════════════════════════
+function shuffle(a){
+  const b=[...a];
+  for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}
+  return b;
+}
 
-        function dragStart(e) {
-            if(e.type === 'touchstart') e.preventDefault(); // Evitar scroll nativo al agarrar
-            draggedItem = this;
-            originalParent = this.parentNode;
-            
-            const rect = this.getBoundingClientRect();
-            this.classList.add('dragging');
-            this.style.width = rect.width + 'px';
-            this.style.height = rect.height + 'px';
-            
-            moveItemTo(e);
-            document.body.appendChild(this);
-        }
+function buildEx1(){
+  const g=document.getElementById('vGrid'); g.innerHTML='';
+  VERBS.forEach((v,vi)=>{
+    if(!ss[vi]){
+      let sh; do{sh=shuffle(v.past.split(''));}while(sh.join('')===v.past);
+      ss[vi]=sh;
+    }
+    if(!sc[vi])sc[vi]=[];
+    const card=document.createElement('div');
+    card.className='vcard'; card.id=`vc${vi}`;
+    card.innerHTML=`<div class="vc-lbl">Past tense of:</div>
+<div class="vc-base">${v.base}<span>→ past</span></div>
+<div class="tiles-row" id="sc${vi}"></div>
+<div class="ans-row"  id="an${vi}"></div>
+<div class="vfb"      id="fb${vi}"></div>`;
+    g.appendChild(card);
+    renderV(vi);
+  });
+}
 
-        function dragMove(e) {
-            if (!draggedItem) return;
-            if(e.type === 'touchmove') e.preventDefault();
-            
-            moveItemTo(e);
-            handleAutoScroll(e);
-        }
+function renderV(vi){
+  const sh=ss[vi], ans=sc[vi]||[], past=VERBS[vi].past;
+  // scrambled
+  const sEl=document.getElementById(`sc${vi}`); sEl.innerHTML='';
+  sh.forEach((l,li)=>{
+    const used=ans.indexOf(li)!==-1;
+    const t=document.createElement('div');
+    t.className='ltile'+(used?' used':''); t.textContent=l;
+    t.onclick=()=>{
+      if(used)return;
+      sc[vi]=[...(sc[vi]||[]),li];
+      renderV(vi); save(); prog();
+      if(sc[vi].length===past.length) autoCheck1(vi);
+    };
+    sEl.appendChild(t);
+  });
+  // answer
+  const aEl=document.getElementById(`an${vi}`); aEl.innerHTML='';
+  ans.forEach((li,pos)=>{
+    const t=document.createElement('div');
+    t.className='atile'; t.textContent=sh[li];
+    t.onclick=()=>{
+      sc[vi]=sc[vi].filter((_,i)=>i!==pos);
+      document.getElementById(`fb${vi}`).textContent='';
+      document.getElementById(`fb${vi}`).className='vfb';
+      document.getElementById(`vc${vi}`).className='vcard';
+      renderV(vi); save(); prog();
+    };
+    aEl.appendChild(t);
+  });
+}
 
-        function moveItemTo(e) {
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            draggedItem.style.left = (clientX - draggedItem.offsetWidth / 2) + 'px';
-            draggedItem.style.top = (clientY - draggedItem.offsetHeight / 2) + 'px';
-        }
+function autoCheck1(vi){
+  const ans=sc[vi]||[], sh=ss[vi], past=VERBS[vi].past;
+  const formed=ans.map(li=>sh[li]).join('');
+  const card=document.getElementById(`vc${vi}`);
+  const fb=document.getElementById(`fb${vi}`);
+  if(formed===past){card.className='vcard correct';fb.textContent='✓ Correct!';fb.className='vfb ok';}
+  else{card.className='vcard wrong';fb.textContent=`✗ Try again`;fb.className='vfb ng';}
+}
 
-        // LÓGICA DE AUTO-SCROLL ZONA 70px
-        function handleAutoScroll(e) {
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            const edgeThreshold = 70;
-            const scrollSpeed = 15;
+function checkEx1(){
+  let ok=0;
+  VERBS.forEach((v,vi)=>{
+    const ans=sc[vi]||[], sh=ss[vi]||v.past.split('');
+    const formed=ans.map(li=>sh[li]).join('');
+    const card=document.getElementById(`vc${vi}`), fb=document.getElementById(`fb${vi}`);
+    if(formed===v.past){ok++;card.className='vcard correct';fb.textContent='✓ Correct!';fb.className='vfb ok';}
+    else{card.className='vcard wrong';fb.textContent=`✗ Answer: ${v.past}`;fb.className='vfb ng';}
+  });
+  s1=ok;
+  document.getElementById('sc1').textContent=`Score: ${ok}/${VERBS.length}`;
+  summ(); save();
+}
 
-            clearInterval(scrollInterval);
+function resetEx1(){
+  sc={}; ss={}; s1=null;
+  document.getElementById('sc1').textContent='Score: –';
+  buildEx1(); summ(); save();
+}
 
-            if (clientY < edgeThreshold) {
-                scrollInterval = setInterval(() => window.scrollBy(0, -scrollSpeed), 20);
-            } else if (clientY > window.innerHeight - edgeThreshold) {
-                scrollInterval = setInterval(() => window.scrollBy(0, scrollSpeed), 20);
-            }
-        }
+// ═══════════════════════════════════════════════════════
+// DRAG ENGINE (mouse + touch)
+// ═══════════════════════════════════════════════════════
+const ghost=document.getElementById('ghost');
+let dragWord=null, dragSrc=null, dragTimer=null;
+const ZONE=70, SPD=8;
 
-        function dragEnd(e) {
-            if (!draggedItem) return;
-            clearInterval(scrollInterval);
-            
-            const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-            const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
-            
-            draggedItem.style.display = 'none';
-            const elementBelow = document.elementFromPoint(clientX, clientY);
-            draggedItem.style.display = 'flex';
+function startScroll(cy){
+  clearInterval(dragTimer);
+  dragTimer=setInterval(()=>{
+    if(cy<ZONE) window.scrollBy(0,-SPD);
+    else if(cy>window.innerHeight-ZONE) window.scrollBy(0,SPD);
+  },16);
+}
+function stopScroll(){clearInterval(dragTimer);}
 
-            const dropZone = elementBelow ? elementBelow.closest('.drop-zone, .word-bank') : null;
+function mkDraggable(el){
+  el.addEventListener('mousedown',dragStart);
+  el.addEventListener('touchstart',dragStart,{passive:false});
+}
 
-            draggedItem.classList.remove('dragging');
-            draggedItem.style.position = '';
-            draggedItem.style.left = '';
-            draggedItem.style.top = '';
-            draggedItem.style.width = '';
-            draggedItem.style.height = '';
+function dragStart(e){
+  e.preventDefault();
+  const touch=e.touches?.[0];
+  let cx=touch?touch.clientX:e.clientX, cy=touch?touch.clientY:e.clientY;
+  dragWord=e.currentTarget.dataset.word;
+  ghost.textContent=dragWord; ghost.style.display='block';
+  ghost.style.left=(cx-45)+'px'; ghost.style.top=(cy-20)+'px';
+  e.currentTarget.classList.add('dragging');
+  const src=e.currentTarget;
 
-            if (dropZone) {
-                // Si la zona de drop ya tiene un elemento y no es el wordbank, devolver el existente al banco
-                if(dropZone.classList.contains('drop-zone') && dropZone.children.length > 0) {
-                    const existing = dropZone.children[0];
-                    const bankId = draggedItem.dataset.word.includes(audioVerbs[0]) || audioVerbs.includes(draggedItem.dataset.word) ? 'audio-bank' : 'image-bank';
-                    document.getElementById(bankId).appendChild(existing);
-                }
-                dropZone.appendChild(draggedItem);
-            } else {
-                originalParent.appendChild(draggedItem);
-            }
+  const mm=e.touches?'touchmove':'mousemove';
+  const mu=e.touches?'touchend':'mouseup';
 
-            draggedItem = null;
-            saveProgress();
-        }
+  function move(ev){
+    const t=ev.touches?.[0];
+    cx=t?t.clientX:ev.clientX; cy=t?t.clientY:ev.clientY;
+    ghost.style.left=(cx-45)+'px'; ghost.style.top=(cy-20)+'px';
+    startScroll(cy);
+    // highlight target
+    document.querySelectorAll('.dzone,.idrop').forEach(z=>z.classList.remove('over'));
+    const el=document.elementFromPoint(cx,cy);
+    if(el){const z=el.closest('[data-ex]');if(z)z.classList.add('over');}
+  }
+  function up(ev){
+    ghost.style.display='none'; stopScroll();
+    src.classList.remove('dragging');
+    document.querySelectorAll('.dzone,.idrop').forEach(z=>z.classList.remove('over'));
+    const t=ev.changedTouches?.[0];
+    const ex=t?t.clientX:ev.clientX, ey=t?t.clientY:ev.clientY;
+    const el=document.elementFromPoint(ex,ey);
+    if(el){const z=el.closest('[data-ex]');if(z)drop(dragWord,z.dataset.ex,+z.dataset.idx);}
+    document.removeEventListener(mm,move);
+    document.removeEventListener(mu,up);
+  }
+  document.addEventListener(mm,move);
+  document.addEventListener(mu,up);
+}
 
-        // --- SAVE/RESTORE ---
-        function saveProgress() {
-            localStorage.setItem('coeduca_name', document.getElementById('studentName').value);
-            
-            const st = { unscramble: [], audioDrop: [], imageDrop: [] };
-            
-            // Save unscramble
-            document.querySelectorAll('.unscramble-answer').forEach(box => {
-                let ans = Array.from(box.children).map(c => c.textContent).join('');
-                st.unscramble.push(ans);
-            });
+function drop(word,ex,idx){
+  if(ex==='e2'){a2[idx]=word; buildEx2();}
+  if(ex==='e3'){a3[idx]=word; buildEx3();}
+  save(); prog();
+}
 
-            // Save Drops (by matching correct text vs actual text)
-            document.querySelectorAll('#audio-sentences .drop-zone').forEach(z => {
-                st.audioDrop.push(z.children.length ? z.children[0].dataset.word : '');
-            });
-            document.querySelectorAll('#image-grid .drop-zone').forEach(z => {
-                st.imageDrop.push(z.children.length ? z.children[0].dataset.word : '');
-            });
+// ═══════════════════════════════════════════════════════
+// EXERCISE 2 — AUDIO DRAG
+// ═══════════════════════════════════════════════════════
+function buildEx2(){
+  // wordbank
+  const wb=document.getElementById('wbItems2'); wb.innerHTML='';
+  WORDS2.forEach(w=>{
+    const used=Object.values(a2).includes(w);
+    const el=document.createElement('div');
+    el.className='dword'+(used?' used':'');
+    el.textContent=w; el.dataset.word=w;
+    mkDraggable(el); wb.appendChild(el);
+  });
+  // sentences
+  const sl=document.getElementById('sentList'); sl.innerHTML='';
+  SENTENCES.forEach((s,si)=>{
+    const item=document.createElement('div');
+    item.className='sent-item'; item.id=`si${si}`;
+    const num=document.createElement('span'); num.className='s-num'; num.textContent=`${si+1}.`;
+    const bef=document.createElement('span'); bef.textContent=s.before+' ';
+    const dz=document.createElement('div');
+    dz.className='dzone'+(a2[si]?' filled':'');
+    dz.textContent=a2[si]||'___';
+    dz.dataset.ex='e2'; dz.dataset.idx=si;
+    dz.onclick=()=>{if(a2[si]){delete a2[si];buildEx2();save();prog();}};
+    const aft=document.createElement('span'); aft.textContent=' '+s.after;
+    item.append(num,bef,dz,aft);
+    sl.appendChild(item);
+  });
+}
 
-            localStorage.setItem('coeduca_state', JSON.stringify(st));
-        }
+function checkEx2(){
+  let ok=0;
+  SENTENCES.forEach((s,si)=>{
+    const item=document.getElementById(`si${si}`);
+    const dz=item.querySelector('[data-ex]');
+    const ans=a2[si]||'';
+    const good=ans===s.answer;
+    if(good){ok++;item.className='sent-item correct';if(dz)dz.className='dzone filled cf';}
+    else{item.className='sent-item wrong';if(dz)dz.className='dzone filled nf';}
+  });
+  s2=ok;
+  document.getElementById('sc2').textContent=`Score: ${ok}/${SENTENCES.length}`;
+  summ(); save();
+}
 
-        function restoreState() {
-            if (!state) return;
-            
-            // Las restauraciones complejas como volver a clickear letras para el estado guardado
-            // se simplifican pidiendo a los estudiantes que terminen la sesión si es posible.
-            // Para mantener el código robusto, confiaremos en el autoguardado para la calificación,
-            // pero la UI visual de botones se reinicia al recargar para evitar desincronizaciones de DOM.
-        }
+function resetEx2(){
+  a2={}; s2=null;
+  document.getElementById('sc2').textContent='Score: –';
+  buildEx2();
+  document.querySelectorAll('.sent-item').forEach(el=>el.className='sent-item');
+  summ(); save();
+}
 
-        // --- GENERATE PDF REPORT ---
-        function generatePDF() {
-            const name = document.getElementById('studentName').value.trim();
-            if (!name) {
-                alert("¡Por favor escribe tu nombre primero!");
-                return;
-            }
+// ═══════════════════════════════════════════════════════
+// EXERCISE 3 — IMAGE MATCH
+// ═══════════════════════════════════════════════════════
+function buildEx3(){
+  const wb=document.getElementById('wbItems3'); wb.innerHTML='';
+  WORDS3.forEach(w=>{
+    const used=Object.values(a3).includes(w);
+    const el=document.createElement('div');
+    el.className='dword'+(used?' used':'');
+    el.textContent=w; el.dataset.word=w;
+    mkDraggable(el); wb.appendChild(el);
+  });
+  const grid=document.getElementById('imgGrid'); grid.innerHTML='';
+  IMAGES.forEach((im,ii)=>{
+    const card=document.createElement('div');
+    card.className='icard'; card.id=`ic${ii}`;
+    const img=document.createElement('img');
+    img.src=im.img; img.alt=im.answer;
+    img.onerror=()=>{img.style.background='#c8d5e8';img.alt='Image';};
+    const dz=document.createElement('div');
+    dz.className='idrop'+(a3[ii]?' filled':'');
+    dz.textContent=a3[ii]||'Drop here';
+    dz.dataset.ex='e3'; dz.dataset.idx=ii;
+    dz.onclick=()=>{if(a3[ii]){delete a3[ii];buildEx3();save();prog();}};
+    card.append(img,dz); grid.appendChild(card);
+  });
+}
 
-            saveProgress(); // Asegurar últimos cambios
-            const st = JSON.parse(localStorage.getItem('coeduca_state'));
-            
-            let totalScore = 0;
-            const resultsDiv = document.getElementById('pdf-results');
-            resultsDiv.innerHTML = '';
-            document.getElementById('pdf-name').textContent = name;
+function checkEx3(){
+  let ok=0;
+  IMAGES.forEach((im,ii)=>{
+    const card=document.getElementById(`ic${ii}`);
+    const dz=card.querySelector('[data-ex]');
+    const ans=a3[ii]||'';
+    const good=ans===im.answer;
+    if(good){ok++;card.className='icard correct';if(dz)dz.className='idrop filled cf';}
+    else{card.className='icard wrong';if(dz)dz.className='idrop filled nf';}
+  });
+  s3=ok;
+  document.getElementById('sc3').textContent=`Score: ${ok}/${IMAGES.length}`;
+  summ(); save();
+}
 
-            // Calc Unscramble (5 pts)
-            let sc1 = 0;
-            let html1 = `<div><h3 class="font-bold border-b bg-gray-100 p-1">1. Unscramble</h3><ul class="text-sm mt-2 space-y-1">`;
-            unscrambleWords.forEach((word, i) => {
-                const ans = st.unscramble[i] || '[No Answer]';
-                if (ans === word) { sc1++; html1 += `<li>✅ ${word}</li>`; }
-                else { html1 += `<li>❌ ${ans} <span class="text-gray-400 text-xs">(Correct: ${word})</span></li>`; }
-            });
-            html1 += `</ul><p class="text-right text-sm font-bold mt-1">Score: ${sc1}/5</p></div>`;
-            totalScore += sc1;
-            resultsDiv.innerHTML += html1;
+function resetEx3(){
+  a3={}; s3=null;
+  document.getElementById('sc3').textContent='Score: –';
+  buildEx3();
+  IMAGES.forEach((_,ii)=>document.getElementById(`ic${ii}`).className='icard');
+  summ(); save();
+}
 
-            // Calc Audio (5 pts)
-            let sc2 = 0;
-            const audioCorrects = ['bought', 'made', 'flew', 'read', 'drew'];
-            let html2 = `<div><h3 class="font-bold border-b bg-gray-100 p-1">2. Audio Sentences</h3><ul class="text-sm mt-2 space-y-1">`;
-            audioCorrects.forEach((word, i) => {
-                const ans = st.audioDrop[i] || '[No Answer]';
-                if (ans === word) { sc2++; html2 += `<li>✅ Sentence ${i+1}: ${ans}</li>`; }
-                else { html2 += `<li>❌ Sentence ${i+1}: ${ans} <span class="text-gray-400 text-xs">(Correct: ${word})</span></li>`; }
-            });
-            html2 += `</ul><p class="text-right text-sm font-bold mt-1">Score: ${sc2}/5</p></div>`;
-            totalScore += sc2;
-            resultsDiv.innerHTML += html2;
+// ═══════════════════════════════════════════════════════
+// AUDIO
+// ═══════════════════════════════════════════════════════
+let playing=false;
+const audioEl=document.getElementById('audioEl');
+function toggleAudio(){
+  if(playing){audioEl.pause();setPlayIcon(false);}
+  else{audioEl.play().catch(()=>{});setPlayIcon(true);}
+  playing=!playing;
+}
+audioEl.ontimeupdate=()=>{
+  if(audioEl.duration){
+    document.getElementById('apFill').style.width=(audioEl.currentTime/audioEl.duration*100)+'%';
+  }
+};
+audioEl.onended=()=>{playing=false;setPlayIcon(false);document.getElementById('apFill').style.width='100%';};
+function setPlayIcon(p){
+  document.getElementById('playIco').outerHTML=p
+    ?'<g id="playIco"><rect x="4" y="3" width="4" height="14" rx="1" fill="white"/><rect x="12" y="3" width="4" height="14" rx="1" fill="white"/></g>'
+    :'<polygon id="playIco" points="5,3 17,10 5,17" fill="white"/>';
+}
 
-            // Calc Images (5 pts)
-            let sc3 = 0;
-            const imgCorrects = imageVerbs.map(v => v.word);
-            let html3 = `<div><h3 class="font-bold border-b bg-gray-100 p-1">3. Image Match</h3><ul class="text-sm mt-2 space-y-1">`;
-            imgCorrects.forEach((word, i) => {
-                const ans = st.imageDrop[i] || '[No Answer]';
-                if (ans === word) { sc3++; html3 += `<li>✅ Image ${i+1}: ${ans}</li>`; }
-                else { html3 += `<li>❌ Image ${i+1}: ${ans} <span class="text-gray-400 text-xs">(Correct: ${word})</span></li>`; }
-            });
-            html3 += `</ul><p class="text-right text-sm font-bold mt-1">Score: ${sc3}/5</p></div>`;
-            totalScore += sc3;
-            resultsDiv.innerHTML += html3;
+// ═══════════════════════════════════════════════════════
+// PDF
+// ═══════════════════════════════════════════════════════
+function grade(){
+  const c1=s1??0, c2=s2??0, c3=s3??0;
+  const tot=VERBS.length+SENTENCES.length+IMAGES.length;
+  const cor=c1+c2+c3;
+  const g=(cor/tot*9+1).toFixed(2);
+  return{c1,c2,c3,cor,tot,g};
+}
 
-            // Calcular nota final 1-10 oculta en el footer
-            const grade = ((totalScore / 15) * 10).toFixed(1);
-            document.getElementById('pdf-grade').textContent = `System Eval: ${grade}/10.0 [${totalScore}/15]`;
+function genPDF(){
+  const btn=document.getElementById('dlBtn');
+  btn.disabled=true; btn.textContent='⏳ Generating…';
+  setTimeout(()=>{
+    try{buildPDF();}catch(e){console.error(e);}
+    btn.disabled=false; btn.innerHTML='📄 Download PDF';
+  },80);
+}
 
-            // Mostrar temporalmente para el PDF (renderizado puro)
-            const element = document.getElementById('pdf-report');
-            element.style.display = 'block';
+function buildPDF(){
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'p',unit:'mm',format:'a4'});
+  const W=210,H=297,m=18;
+  let y=0;
+  const np=()=>{doc.addPage();y=m;};
+  const ck=(n=10)=>{if(y+n>H-20)np();};
 
-            const opt = {
-                margin:       0.5,
-                filename:     `English_Worksheet_${name.replace(/\s+/g, '_')}.pdf`,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2 },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
+  // ── header
+  doc.setFillColor(26,39,68); doc.rect(0,0,W,40,'F');
+  doc.setFillColor(232,118,26); doc.rect(0,40,W,5,'F');
+  doc.setFillColor(42,191,191); doc.rect(0,45,W,2,'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold'); doc.setFontSize(20);
+  doc.text('Irregular Verbs Worksheet',m,16);
+  doc.setFontSize(10); doc.setFont('helvetica','normal');
+  doc.text('English A1+  ·  9th Grade  ·  Sección A  ·  COEDUCA',m,24);
+  doc.text('Teacher: Prof. José Eliseo Martínez',m,31);
+  // decorative circle
+  doc.setFillColor(255,255,255,0.06);
+  doc.circle(185,15,18,'F');
 
-            // Mostrar loading en el botón
-            const btn = document.querySelector('button');
-            const originalBtnText = btn.innerHTML;
-            btn.innerHTML = 'Generando PDF...';
+  y=55;
+  // student box
+  const name=document.getElementById('sName').value||'_____________________';
+  const date=document.getElementById('sDate').value||'__________';
+  doc.setFillColor(255,248,240); doc.setDrawColor(232,118,26); doc.setLineWidth(.6);
+  doc.roundedRect(m,y,W-m*2,20,3,3,'FD');
+  doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(10);
+  doc.text(`Student: ${name}`,m+5,y+8);
+  doc.text(`Date: ${date}`,m+5,y+15);
+  y+=28;
 
-            html2pdf().set(opt).from(element).save().then(() => {
-                element.style.display = 'none'; // Ocultar después
-                btn.innerHTML = originalBtnText; // Restaurar botón
-            });
-        }
+  // ── EX1
+  const secHd=(title)=>{
+    ck(16);
+    doc.setFillColor(232,118,26);
+    doc.roundedRect(m,y,W-m*2,13,2,2,'F');
+    doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(11);
+    doc.text(title,m+5,y+9);
+    y+=18;
+  };
+  secHd('Exercise 1 – Unscramble the Irregular Verbs');
 
-        window.onload = initApp;
-    </script>
+  // table header
+  doc.setFillColor(242,244,250); doc.rect(m,y,W-m*2,8,'F');
+  doc.setTextColor(100,110,130); doc.setFont('helvetica','bold'); doc.setFontSize(8);
+  doc.text('BASE VERB',m+4,y+5.5);
+  doc.text('EXPECTED (Past)',m+55,y+5.5);
+  doc.text('STUDENT WROTE',m+118,y+5.5);
+  doc.text('✓/✗',W-m-12,y+5.5);
+  y+=9;
+
+  VERBS.forEach((v,vi)=>{
+    ck(10);
+    const ans=(sc[vi]||[]), sh=(ss[vi]||v.past.split(''));
+    const formed=ans.map(li=>sh[li]).join('');
+    const ok=formed===v.past;
+    const bg=formed.length>0?(ok?[240,253,244]:[254,242,242]):[255,255,255];
+    doc.setFillColor(...bg); doc.rect(m,y,W-m*2,9,'F');
+    doc.setDrawColor(220,220,220); doc.setLineWidth(.3);
+    doc.rect(m,y,W-m*2,9,'S');
+    doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(9.5);
+    doc.text(v.base,m+4,y+6.5);
+    doc.setFont('helvetica','normal');
+    doc.text(v.past,m+55,y+6.5);
+    doc.text(formed||'—',m+118,y+6.5);
+    if(formed.length===v.past.length){
+      doc.setTextColor(ok?34:239,ok?197:68,ok?94:68);
+      doc.setFont('helvetica','bold');
+      doc.text(ok?'✓':'✗',W-m-9,y+6.5);
+    }
+    y+=9;
+  });
+  y+=4;
+  doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(10);
+  doc.text(`Exercise 1 Score: ${s1??0} / ${VERBS.length}`,m,y);
+  y+=14;
+
+  // ── EX2
+  secHd('Exercise 2 – Listen & Complete');
+  SENTENCES.forEach((s,si)=>{
+    ck(16);
+    const ans=a2[si]||'';
+    const ok=ans===s.answer;
+    const bg=ans?(ok?[240,253,244]:[254,242,242]):[255,255,255];
+    doc.setFillColor(...bg); doc.setDrawColor(220,220,220); doc.setLineWidth(.3);
+    doc.roundedRect(m,y,W-m*2,13,2,2,'FD');
+    const txt=`${s.before} [${ans||'     '}] ${s.after}`;
+    doc.setTextColor(26,39,68); doc.setFont('helvetica','normal'); doc.setFontSize(10.5);
+    doc.text(`${si+1}.  ${txt}`,m+4,y+9);
+    if(ans){doc.setTextColor(ok?34:239,ok?197:68,ok?94:68);doc.setFont('helvetica','bold');doc.setFontSize(12);doc.text(ok?'✓':'✗',W-m-7,y+9);}
+    y+=16;
+  });
+  y+=2;
+  doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(10);
+  doc.text(`Exercise 2 Score: ${s2??0} / ${SENTENCES.length}`,m,y);
+  y+=14;
+
+  // ── EX3
+  secHd('Exercise 3 – Match the Verb to the Image');
+  IMAGES.forEach((im,ii)=>{
+    ck(14);
+    const ans=a3[ii]||'';
+    const ok=ans===im.answer;
+    const bg=ans?(ok?[240,253,244]:[254,242,242]):[255,255,255];
+    doc.setFillColor(...bg); doc.setDrawColor(220,220,220); doc.setLineWidth(.3);
+    doc.roundedRect(m,y,W-m*2,12,2,2,'FD');
+    doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(9.5);
+    doc.text(`${ii+1}.  Image (${im.answer.toUpperCase()})`,m+4,y+5);
+    doc.setFont('helvetica','normal');
+    doc.text(`Student wrote: ${ans||'—'}`,m+4,y+10);
+    if(ans){doc.setTextColor(ok?34:239,ok?197:68,ok?94:68);doc.setFont('helvetica','bold');doc.setFontSize(12);doc.text(ok?'✓':'✗',W-m-7,y+9);}
+    y+=15;
+  });
+  y+=2;
+  doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(10);
+  doc.text(`Exercise 3 Score: ${s3??0} / ${IMAGES.length}`,m,y);
+  y+=16;
+
+  // ── SUMMARY BOX
+  ck(36);
+  doc.setFillColor(245,248,255); doc.setDrawColor(42,191,191); doc.setLineWidth(.8);
+  doc.roundedRect(m,y,W-m*2,32,4,4,'FD');
+  doc.setLineWidth(.2);
+  doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(13);
+  doc.text('Results Summary',m+5,y+10);
+  doc.setFontSize(10); doc.setFont('helvetica','normal');
+  const {c1,c2,c3,cor,tot}=grade();
+  const col=W-m*2-10;
+  doc.text(`Ex. 1 (Unscramble):  ${c1} / ${VERBS.length}`,m+5,y+20);
+  doc.text(`Ex. 2 (Listen & Fill):  ${c2} / ${SENTENCES.length}`,m+5+(col/3),y+20);
+  doc.text(`Ex. 3 (Image Match):  ${c3} / ${IMAGES.length}`,m+5+(col*2/3),y+20);
+  doc.setFont('helvetica','bold');
+  doc.text(`Total Correct: ${cor} out of ${tot}`,m+5,y+28);
+  y+=38;
+
+  // ── FOOTER (grade hidden here)
+  const {g}=grade();
+  const pages=doc.internal.getNumberOfPages();
+  for(let p=1;p<=pages;p++){
+    doc.setPage(p);
+    doc.setFillColor(26,39,68); doc.rect(0,H-14,W,14,'F');
+    doc.setTextColor(160,175,200); doc.setFont('helvetica','normal'); doc.setFontSize(8);
+    doc.text(`COEDUCA · English A1+ · 9th Grade · Sección A · Prof. José Eliseo Martínez`,m,H-5.5);
+    doc.setTextColor(100,115,145); doc.setFontSize(7);
+    doc.text(`${cor}/${tot} correct  |  Grade: ${g}/10`,W-m-38,H-5.5);
+  }
+
+  const fn=`Irregular_Verbs_${(document.getElementById('sName').value||'Student').replace(/\s+/g,'_')}.pdf`;
+  doc.save(fn);
+}
+
+// ═══════════════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded',()=>{
+  load();
+  buildEx1(); buildEx2(); buildEx3();
+  summ(); prog();
+  if(!document.getElementById('sDate').value){
+    document.getElementById('sDate').value=new Date().toISOString().split('T')[0];
+    save();
+  }
+});
+</script>
 </body>
 </html>
