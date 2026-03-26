@@ -9,137 +9,190 @@
 <style>
 :root{
   --or:#E8761A;--or2:#F5A94E;--nav:#1A2744;--nav2:#253561;--teal:#2ABFBF;
-  --cream:#FFF8F0;--white:#fff;--gr:#6B7280;--lgr:#F3F4F6;
+  --cream:#FFF8F0;--gr:#6B7280;--lgr:#F3F4F6;
   --ok:#22C55E;--err:#EF4444;--shad:0 4px 20px rgba(26,39,68,.12);--rad:16px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--nav);min-height:100vh;}
 
-/* ── HEADER ─────────────────────────────────────────── */
-.site-hd{background:linear-gradient(135deg,var(--nav),var(--nav2));padding:20px 20px 14px;color:#fff;position:relative;overflow:hidden;}
-.site-hd::before,.site-hd::after{content:'';position:absolute;border-radius:50%;opacity:.12;}
-.site-hd::before{width:220px;height:220px;background:var(--or);top:-70px;right:-50px;}
-.site-hd::after{width:120px;height:120px;background:var(--teal);bottom:-60px;left:30px;}
+.site-hd{background:linear-gradient(135deg,var(--nav),var(--nav2));padding:20px 20px 16px;color:#fff;position:relative;overflow:hidden;}
+.site-hd::before{content:'';position:absolute;width:240px;height:240px;background:var(--or);border-radius:50%;opacity:.1;top:-80px;right:-60px;}
+.site-hd::after{content:'';position:absolute;width:130px;height:130px;background:var(--teal);border-radius:50%;opacity:.1;bottom:-60px;left:20px;}
 .hd-inner{max-width:900px;margin:0 auto;position:relative;z-index:1;}
-.badge{display:inline-flex;align-items:center;gap:6px;background:var(--or);color:#fff;padding:3px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
-.hd-title{font-family:'Sora',sans-serif;font-size:clamp(19px,4vw,28px);font-weight:800;line-height:1.2;}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--or);color:#fff;padding:3px 13px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:9px;}
+.hd-title{font-family:'Sora',sans-serif;font-size:clamp(20px,4.5vw,30px);font-weight:800;line-height:1.2;}
 .hd-title span{color:var(--or2);}
-.hd-meta{margin-top:7px;font-size:12px;opacity:.8;display:flex;flex-wrap:wrap;gap:12px;}
-.prog-wrap{background:rgba(255,255,255,.15);height:5px;border-radius:3px;margin-top:14px;overflow:hidden;}
-.prog-fill{height:100%;background:var(--or2);border-radius:3px;transition:width .5s ease;}
+.hd-meta{margin-top:8px;font-size:12px;opacity:.8;display:flex;flex-wrap:wrap;gap:14px;}
+.prog-bar-wrap{margin-top:14px;}
+.prog-label{display:flex;justify-content:space-between;font-size:11px;opacity:.7;margin-bottom:5px;}
+.prog-track{background:rgba(255,255,255,.15);height:7px;border-radius:4px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--or2));border-radius:4px;transition:width .5s ease;}
 
-/* ── LAYOUT ──────────────────────────────────────────── */
-main{max-width:900px;margin:0 auto;padding:22px 14px 70px;}
+main{max-width:900px;margin:0 auto;padding:24px 14px 80px;}
 
-/* ── STUDENT CARD ────────────────────────────────────── */
-.std-card{background:#fff;border-radius:var(--rad);padding:22px;box-shadow:var(--shad);margin-bottom:28px;border-left:4px solid var(--or);}
-.std-card h2{font-family:'Sora',sans-serif;font-size:15px;margin-bottom:14px;}
+.std-card{background:#fff;border-radius:var(--rad);padding:22px;box-shadow:var(--shad);margin-bottom:28px;border-left:5px solid var(--or);}
+.std-card h2{font-family:'Sora',sans-serif;font-size:15px;margin-bottom:15px;}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media(max-width:460px){.frow{grid-template-columns:1fr;}}
 .fg label{display:block;font-size:11px;font-weight:700;color:var(--gr);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
-.fg input{width:100%;padding:9px 12px;border:2px solid #E5E7EB;border-radius:10px;font-family:'Nunito',sans-serif;font-size:15px;color:var(--nav);transition:border-color .2s;outline:none;}
+.fg input{width:100%;padding:10px 13px;border:2px solid #E5E7EB;border-radius:10px;font-family:'Nunito',sans-serif;font-size:15px;color:var(--nav);transition:border-color .2s;outline:none;}
 .fg input:focus{border-color:var(--or);}
 
-/* ── SECTION CARD ────────────────────────────────────── */
 .sec{background:#fff;border-radius:var(--rad);box-shadow:var(--shad);margin-bottom:28px;overflow:hidden;}
-.sec-hd{background:linear-gradient(135deg,var(--or),var(--or2));padding:16px 22px;color:#fff;display:flex;align-items:center;gap:14px;}
-.sec-num{background:rgba(255,255,255,.25);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:15px;flex-shrink:0;}
+.sec-hd{background:linear-gradient(135deg,var(--or),var(--or2));padding:17px 22px;color:#fff;display:flex;align-items:center;gap:14px;}
+.sec-num{background:rgba(255,255,255,.28);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:16px;flex-shrink:0;}
 .sec-t{font-family:'Sora',sans-serif;font-weight:700;font-size:15px;line-height:1.3;}
 .sec-sub{font-size:11px;opacity:.85;margin-top:2px;}
 .sec-body{padding:22px;}
 
-/* ── INSTRUCTION BOX ─────────────────────────────────── */
-.instr{background:linear-gradient(135deg,rgba(42,191,191,.08),rgba(232,118,26,.06));border-left:4px solid var(--teal);border-radius:0 10px 10px 0;padding:11px 14px;margin-bottom:18px;font-size:13.5px;}
+.instr{background:linear-gradient(135deg,rgba(42,191,191,.08),rgba(232,118,26,.06));border-left:4px solid var(--teal);border-radius:0 10px 10px 0;padding:11px 15px;margin-bottom:20px;font-size:13.5px;line-height:1.55;}
 .instr strong{color:var(--or);}
 
-/* ── EX1 LETTER TILES ────────────────────────────────── */
-.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;}
+/* EX1 */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;}
 .vcard{border:2px solid #E5E7EB;border-radius:12px;padding:14px;transition:border-color .25s,background .25s;}
 .vcard.correct{border-color:var(--ok);background:#F0FDF4;}
 .vcard.wrong{border-color:var(--err);background:#FEF2F2;}
 .vc-lbl{font-size:10px;font-weight:700;color:var(--gr);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
-.vc-base{font-size:17px;font-weight:800;margin-bottom:10px;}
+.vc-base{font-size:18px;font-weight:800;margin-bottom:10px;}
 .vc-base span{color:var(--or);font-size:12px;font-weight:600;margin-left:4px;}
-.tiles-row{display:flex;flex-wrap:wrap;gap:5px;min-height:34px;}
-.ltile{width:30px;height:30px;background:var(--nav);color:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:transform .1s,background .15s;user-select:none;-webkit-user-select:none;}
-.ltile:hover{transform:scale(1.12);background:var(--or);}
-.ltile.used{opacity:.25;pointer-events:none;}
-.ans-row{display:flex;flex-wrap:wrap;gap:5px;min-height:34px;border-top:2px dashed #E5E7EB;padding-top:9px;margin-top:4px;}
-.atile{width:30px;height:30px;background:var(--teal);color:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;cursor:pointer;animation:popIn .18s ease;transition:transform .1s;}
-.atile:hover{transform:scale(1.12);}
+.tiles-row{display:flex;flex-wrap:wrap;gap:5px;min-height:36px;}
+.ltile{width:31px;height:31px;background:var(--nav);color:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:transform .1s,background .15s;user-select:none;-webkit-user-select:none;touch-action:manipulation;}
+.ltile:hover{transform:scale(1.13);background:var(--or);}
+.ltile.used{opacity:.22;pointer-events:none;}
+.ans-row{display:flex;flex-wrap:wrap;gap:5px;min-height:36px;border-top:2px dashed #E5E7EB;padding-top:9px;margin-top:6px;}
+.atile{width:31px;height:31px;background:var(--teal);color:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;cursor:pointer;animation:popIn .18s ease;transition:transform .1s;}
+.atile:hover{transform:scale(1.13);}
 @keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
 .vfb{margin-top:7px;font-size:12px;font-weight:700;min-height:18px;}
 .vfb.ok{color:var(--ok);}
 .vfb.ng{color:var(--err);}
 
-/* ── BUTTONS ─────────────────────────────────────────── */
-.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center;}
-.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:11px;font-family:'Nunito',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;border:none;transition:all .2s;}
-.btn-p{background:var(--or);color:#fff;box-shadow:0 4px 12px rgba(232,118,26,.28);}
+/* BUTTONS */
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;align-items:center;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 21px;border-radius:11px;font-family:'Nunito',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;border:none;transition:all .2s;}
+.btn-p{background:var(--or);color:#fff;box-shadow:0 4px 14px rgba(232,118,26,.3);}
 .btn-p:hover{background:var(--nav);transform:translateY(-2px);}
 .btn-s{background:var(--lgr);color:var(--nav);}
 .btn-s:hover{background:#E5E7EB;}
-.sc-badge{display:inline-flex;align-items:center;background:var(--lgr);padding:7px 14px;border-radius:20px;font-weight:700;font-size:13px;margin-left:4px;}
+.sc-badge{display:inline-flex;align-items:center;background:var(--lgr);padding:7px 15px;border-radius:20px;font-weight:700;font-size:13px;}
 
-/* ── AUDIO ───────────────────────────────────────────── */
-.audio-wrap{background:linear-gradient(135deg,var(--nav),var(--nav2));border-radius:12px;padding:18px;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:14px;}
-.play-btn{width:50px;height:50px;background:var(--or);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s,background .2s;}
-.play-btn:hover{transform:scale(1.1);background:var(--or2);}
-.audio-info p{font-size:12px;opacity:.75;margin-bottom:3px;}
-.audio-info strong{font-size:14px;font-family:'Sora',sans-serif;}
+/* AUDIO PLAYER */
+.audio-player{background:linear-gradient(135deg,var(--nav),var(--nav2));border-radius:14px;padding:18px 20px;color:#fff;margin-bottom:22px;}
+.ap-top{display:flex;align-items:center;gap:14px;}
+.ap-btn{width:52px;height:52px;min-width:52px;background:var(--or);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s,background .2s;box-shadow:0 4px 14px rgba(232,118,26,.45);}
+.ap-btn:hover{transform:scale(1.1);background:var(--or2);}
+.ap-meta{flex:1;min-width:0;}
+.ap-meta p{font-size:11px;opacity:.7;margin-bottom:2px;}
+.ap-meta strong{font-family:'Sora',sans-serif;font-size:13px;display:block;}
+.ap-time{font-size:11px;opacity:.6;margin-top:5px;font-variant-numeric:tabular-nums;}
+.ap-bottom{margin-top:14px;}
+.ap-slider{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:rgba(255,255,255,.22);outline:none;cursor:pointer;}
+.ap-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--or2);cursor:pointer;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3);transition:transform .15s;}
+.ap-slider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--or2);cursor:pointer;border:3px solid #fff;}
+.ap-slider::-webkit-slider-thumb:hover{transform:scale(1.25);}
 audio{display:none;}
-.audio-progress{flex:1;height:4px;background:rgba(255,255,255,.2);border-radius:2px;margin-top:8px;overflow:hidden;}
-.audio-prog-fill{height:100%;background:var(--or2);border-radius:2px;transition:width .3s linear;width:0%;}
 
-/* ── WORDBANK ────────────────────────────────────────── */
-.wbank{border:2px dashed var(--teal);border-radius:12px;padding:14px;margin-bottom:18px;}
+/* WORDBANK */
+.wbank{border:2px dashed var(--teal);border-radius:12px;padding:14px;margin-bottom:20px;}
 .wbank.orange{border-color:var(--or);}
 .wbank-lbl{font-size:11px;font-weight:700;color:var(--gr);text-transform:uppercase;letter-spacing:.5px;margin-bottom:11px;}
-.wbank-items{display:flex;flex-wrap:wrap;gap:9px;min-height:40px;}
-.dword{background:var(--nav);color:#fff;padding:7px 15px;border-radius:8px;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;cursor:grab;user-select:none;-webkit-user-select:none;transition:transform .15s,box-shadow .15s,opacity .2s;touch-action:none;}
-.dword:active{cursor:grabbing;}
-.dword.dragging{opacity:.35;transform:scale(.92);}
-.dword.used{opacity:.28;pointer-events:none;}
+.wbank-items{display:flex;flex-wrap:wrap;gap:9px;min-height:42px;}
+.dword{background:var(--nav);color:#fff;padding:8px 16px;border-radius:9px;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;cursor:grab;user-select:none;-webkit-user-select:none;transition:transform .15s,opacity .2s;touch-action:none;box-shadow:0 3px 8px rgba(26,39,68,.25);}
+.dword.dragging{opacity:.3;transform:scale(.9);}
+.dword.used{opacity:.25;pointer-events:none;}
 
-/* ── SENTENCES ───────────────────────────────────────── */
-.sent-list{display:flex;flex-direction:column;gap:11px;}
-.sent-item{background:#fff;border:2px solid #E5E7EB;border-radius:12px;padding:12px 15px;display:flex;align-items:center;flex-wrap:wrap;gap:7px;font-size:15.5px;font-weight:600;transition:border-color .25s,background .25s;}
+/* SENTENCES */
+.sent-list{display:flex;flex-direction:column;gap:12px;}
+.sent-item{background:#fff;border:2px solid #E5E7EB;border-radius:12px;padding:13px 16px;display:flex;align-items:center;flex-wrap:wrap;gap:7px;font-size:15px;font-weight:600;transition:border-color .25s,background .25s;line-height:1.7;}
 .sent-item.correct{border-color:var(--ok);background:#F0FDF4;}
 .sent-item.wrong{border-color:var(--err);background:#FEF2F2;}
-.s-num{font-size:12px;font-weight:800;color:var(--or);min-width:18px;}
-.dzone{display:inline-flex;align-items:center;justify-content:center;min-width:88px;height:34px;border:2px dashed var(--teal);border-radius:8px;padding:0 9px;font-family:'Sora',sans-serif;font-weight:700;font-size:13px;color:var(--teal);transition:all .2s;background:rgba(42,191,191,.05);cursor:default;}
-.dzone.over{background:rgba(42,191,191,.18);border-color:var(--or);color:var(--or);transform:scale(1.05);}
+.s-num{font-size:12px;font-weight:800;color:var(--or);min-width:20px;}
+.dzone{display:inline-flex;align-items:center;justify-content:center;min-width:88px;height:36px;border:2px dashed var(--teal);border-radius:8px;padding:0 10px;font-family:'Sora',sans-serif;font-weight:700;font-size:13px;color:var(--teal);transition:all .2s;background:rgba(42,191,191,.06);cursor:default;}
+.dzone.over{background:rgba(42,191,191,.2);border-color:var(--or);color:var(--or);transform:scale(1.06);}
 .dzone.filled{background:var(--nav);color:#fff;border-style:solid;border-color:var(--nav);cursor:pointer;}
-.dzone.cf{background:var(--ok);color:#fff;border-color:var(--ok);}
-.dzone.nf{background:var(--err);color:#fff;border-color:var(--err);}
+.dzone.cf{background:var(--ok)!important;color:#fff!important;border-color:var(--ok)!important;}
+.dzone.nf{background:var(--err)!important;color:#fff!important;border-color:var(--err)!important;}
 
-/* ── IMAGE GRID ──────────────────────────────────────── */
-.imgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px;}
-.icard{border:2px solid #E5E7EB;border-radius:12px;overflow:hidden;transition:border-color .25s;}
+/* IMAGE GRID */
+.imgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:14px;}
+.icard{border:2px solid #E5E7EB;border-radius:12px;overflow:hidden;transition:border-color .25s,transform .2s;background:#f0f2f5;}
 .icard.correct{border-color:var(--ok);}
 .icard.wrong{border-color:var(--err);}
-.icard img{width:100%;height:125px;object-fit:cover;display:block;background:#ddd;}
-.idrop{padding:9px;min-height:46px;display:flex;align-items:center;justify-content:center;border-top:2px dashed #E5E7EB;font-family:'Sora',sans-serif;font-weight:700;font-size:13px;color:var(--gr);transition:all .2s;text-align:center;}
-.idrop.over{background:rgba(42,191,191,.13);color:var(--teal);}
+.icard img{width:100%;height:118px;object-fit:cover;display:block;}
+.idrop{padding:10px;min-height:46px;display:flex;align-items:center;justify-content:center;border-top:2px dashed #E5E7EB;font-family:'Sora',sans-serif;font-weight:700;font-size:13px;color:var(--gr);transition:all .2s;text-align:center;}
+.idrop.over{background:rgba(42,191,191,.14);color:var(--teal);}
 .idrop.filled{background:var(--nav);color:#fff;border-color:var(--nav);cursor:pointer;}
-.idrop.cf{background:var(--ok);color:#fff;border-color:var(--ok);}
-.idrop.nf{background:var(--err);color:#fff;border-color:var(--err);}
+.idrop.cf{background:var(--ok)!important;color:#fff!important;border-color:var(--ok)!important;}
+.idrop.nf{background:var(--err)!important;color:#fff!important;border-color:var(--err)!important;}
 
-/* ── SUMMARY ─────────────────────────────────────────── */
-.summary{background:linear-gradient(135deg,var(--nav),var(--nav2));border-radius:var(--rad);padding:28px;color:#fff;text-align:center;margin-bottom:32px;}
-.summary h2{font-family:'Sora',sans-serif;font-size:21px;margin-bottom:5px;}
-.summary p{opacity:.75;font-size:13px;margin-bottom:22px;}
-.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:22px;}
-@media(max-width:480px){.sgrid{grid-template-columns:1fr;}}
-.sitem{background:rgba(255,255,255,.1);border-radius:12px;padding:13px;}
+/* MULTIPLE CHOICE */
+.mc-list{display:flex;flex-direction:column;gap:14px;}
+.mc-item{border:2px solid #E5E7EB;border-radius:12px;padding:15px 18px;transition:border-color .25s,background .25s;}
+.mc-item.correct{border-color:var(--ok);background:#F0FDF4;}
+.mc-item.wrong{border-color:var(--err);background:#FEF2F2;}
+.mc-q{font-size:15px;font-weight:700;margin-bottom:12px;}
+.mc-q span{color:var(--or);font-weight:800;}
+.mc-opts{display:flex;flex-wrap:wrap;gap:9px;}
+.mc-opt{padding:8px 18px;border:2px solid #E5E7EB;border-radius:9px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:600;font-size:14px;transition:all .2s;background:#fff;user-select:none;}
+.mc-opt:hover{border-color:var(--or);color:var(--or);}
+.mc-opt.selected{background:var(--nav);color:#fff;border-color:var(--nav);}
+.mc-opt.ok{background:var(--ok)!important;color:#fff!important;border-color:var(--ok)!important;}
+.mc-opt.ng{background:var(--err)!important;color:#fff!important;border-color:var(--err)!important;}
+.mc-opt.reveal-ok{background:#dcfce7!important;border-color:var(--ok)!important;color:#166534!important;font-weight:800!important;}
+
+/* GAP FILL */
+.story-box{background:linear-gradient(135deg,rgba(26,39,68,.03),rgba(42,191,191,.05));border-radius:14px;padding:22px;font-size:16px;line-height:2.4;border:2px solid rgba(42,191,191,.22);}
+.hint{color:var(--or);font-weight:700;font-size:12px;}
+.gap-input{display:inline-block;border:none;border-bottom:2.5px solid var(--teal);background:transparent;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:var(--nav);outline:none;min-width:80px;max-width:120px;text-align:center;padding:2px 4px;transition:border-color .2s;}
+.gap-input:focus{border-color:var(--or);}
+.gap-input.ok{border-color:var(--ok);color:var(--ok);}
+.gap-input.ng{border-color:var(--err);color:var(--err);}
+
+/* TRUE OR FALSE */
+.tf-list{display:flex;flex-direction:column;gap:12px;}
+.tf-item{border:2px solid #E5E7EB;border-radius:12px;padding:14px 18px;transition:border-color .25s,background .25s;}
+.tf-item.correct{border-color:var(--ok);background:#F0FDF4;}
+.tf-item.wrong{border-color:var(--err);background:#FEF2F2;}
+.tf-row{display:flex;align-items:center;flex-wrap:wrap;gap:10px;}
+.tf-sent{flex:1;font-size:15px;font-weight:600;min-width:150px;line-height:1.5;}
+.tf-sent em{color:var(--or);font-style:normal;font-weight:800;text-decoration:underline;}
+.tf-btns{display:flex;gap:8px;flex-shrink:0;}
+.tf-btn{padding:8px 17px;border-radius:9px;border:2px solid #E5E7EB;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;transition:all .2s;background:#fff;}
+.tf-btn[data-v="T"]:hover,.tf-btn[data-v="T"].sel{background:#BBF7D0;border-color:var(--ok);color:#166534;}
+.tf-btn[data-v="F"]:hover,.tf-btn[data-v="F"].sel{background:#FEE2E2;border-color:var(--err);color:#991B1B;}
+.tf-btn.ok{background:var(--ok)!important;color:#fff!important;border-color:var(--ok)!important;}
+.tf-btn.ng{background:var(--err)!important;color:#fff!important;border-color:var(--err)!important;}
+.tf-correction{font-size:12px;color:var(--gr);font-style:italic;padding-top:7px;margin-top:7px;border-top:1px dashed #E5E7EB;display:none;}
+.tf-correction.show{display:block;}
+
+/* CONNECT MATCH */
+.connect-wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:500px){.connect-wrap{grid-template-columns:1fr;}}
+.connect-col-title{font-size:11px;font-weight:700;color:var(--gr);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;text-align:center;}
+.conn-items{display:flex;flex-direction:column;gap:8px;}
+.conn-card{border:2px solid #E5E7EB;border-radius:10px;padding:10px 14px;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;text-align:center;cursor:pointer;transition:all .2s;background:#fff;user-select:none;}
+.conn-card:hover:not(.matched):not(.wrong-flash){border-color:var(--or);color:var(--or);transform:translateY(-1px);}
+.conn-card.selected{background:var(--or);color:#fff;border-color:var(--or);transform:scale(1.05);}
+.conn-card.matched{background:var(--ok);color:#fff;border-color:var(--ok);cursor:default;}
+.conn-card.wrong-flash{background:var(--err);color:#fff;border-color:var(--err);animation:shake .35s ease;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+/* SUMMARY */
+.summary{background:linear-gradient(135deg,var(--nav),var(--nav2));border-radius:var(--rad);padding:30px;color:#fff;text-align:center;margin-bottom:32px;}
+.summary h2{font-family:'Sora',sans-serif;font-size:22px;margin-bottom:6px;}
+.summary p{opacity:.7;font-size:13px;margin-bottom:24px;}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:24px;}
+@media(max-width:560px){.sgrid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:340px){.sgrid{grid-template-columns:1fr;}}
+.sitem{background:rgba(255,255,255,.1);border-radius:12px;padding:14px;}
 .sitem-lbl{font-size:11px;opacity:.7;margin-bottom:5px;line-height:1.4;}
 .sitem-val{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--or2);}
-.dl-btn{background:var(--or);color:#fff;padding:15px 30px;border-radius:13px;font-size:15px;font-weight:800;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:all .2s;box-shadow:0 6px 20px rgba(232,118,26,.4);}
+.dl-btn{background:var(--or);color:#fff;padding:16px 34px;border-radius:14px;font-size:15px;font-weight:800;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:all .2s;box-shadow:0 6px 22px rgba(232,118,26,.42);}
 .dl-btn:hover{background:var(--or2);transform:translateY(-3px);}
 .dl-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 
-/* ── DRAG GHOST ──────────────────────────────────────── */
-#ghost{position:fixed;pointer-events:none;z-index:9999;background:var(--or);color:#fff;padding:7px 15px;border-radius:8px;font-family:'Sora',sans-serif;font-weight:700;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.28);transform:rotate(3deg);display:none;white-space:nowrap;}
+#ghost{position:fixed;pointer-events:none;z-index:9999;background:var(--or);color:#fff;padding:8px 16px;border-radius:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:14px;box-shadow:0 8px 28px rgba(0,0,0,.32);transform:rotate(3deg);display:none;white-space:nowrap;}
 
 @media(max-width:560px){
   .vgrid{grid-template-columns:1fr 1fr;}
@@ -157,662 +210,878 @@ audio{display:none;}
     <div class="hd-meta">
       <span>📚 English A1+ · 9th Grade</span>
       <span>👨‍🏫 Prof. José Eliseo Martínez</span>
-      <span>✏️ Classes 2 &amp; 3</span>
+      <span>✏️ Classes 2 &amp; 3 – The Rule Breakers</span>
     </div>
-    <div class="prog-wrap"><div class="prog-fill" id="progBar" style="width:0%"></div></div>
+    <div class="prog-bar-wrap">
+      <div class="prog-label"><span>Progress</span><span id="progPct">0%</span></div>
+      <div class="prog-track"><div class="prog-fill" id="progBar" style="width:0%"></div></div>
+    </div>
   </div>
 </header>
 
 <main>
-  <!-- Student Info -->
-  <div class="std-card">
-    <h2>📋 Student Information</h2>
-    <div class="frow">
-      <div class="fg"><label>Full Name</label><input id="sName" type="text" placeholder="Your full name…" oninput="save()"></div>
-      <div class="fg"><label>Date</label><input id="sDate" type="date" oninput="save()"></div>
+
+<!-- Student Info -->
+<div class="std-card">
+  <h2>📋 Student Information</h2>
+  <div class="frow">
+    <div class="fg"><label>Full Name</label><input id="sName" type="text" placeholder="Your full name…" oninput="save()"></div>
+    <div class="fg"><label>Date</label><input id="sDate" type="date" oninput="save()"></div>
+  </div>
+</div>
+
+<!-- EX 1 -->
+<div class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">1</div>
+    <div><div class="sec-t">Unscramble the Irregular Verbs</div><div class="sec-sub">Click letters in the correct order to spell the past tense · 10 verbs</div></div>
+  </div>
+  <div class="sec-body">
+    <div class="instr"><strong>Instructions:</strong> Each box shows a base verb. Click the scrambled letters one by one to form the past tense. Click an answer letter to undo it.</div>
+    <div class="vgrid" id="vGrid"></div>
+    <div class="btns">
+      <button class="btn btn-p" onclick="checkEx1()">✓ Check Answers</button>
+      <button class="btn btn-s" onclick="resetEx1()">↺ Reset</button>
+      <span class="sc-badge" id="sc1">Score: –</span>
     </div>
   </div>
+</div>
 
-  <!-- Exercise 1 -->
-  <div class="sec">
-    <div class="sec-hd">
-      <div class="sec-num">1</div>
-      <div>
-        <div class="sec-t">Unscramble the Irregular Verbs</div>
-        <div class="sec-sub">Click the scrambled letters in the correct order to form the past tense</div>
-      </div>
-    </div>
-    <div class="sec-body">
-      <div class="instr"><strong>Instructions:</strong> Each box shows a base verb. Click the letters one by one in the correct order to spell its past tense. Click an answer letter to send it back.</div>
-      <div class="vgrid" id="vGrid"></div>
-      <div class="btns">
-        <button class="btn btn-p" onclick="checkEx1()">✓ Check Answers</button>
-        <button class="btn btn-s" onclick="resetEx1()">↺ Reset</button>
-        <span class="sc-badge" id="sc1">Score: –</span>
-      </div>
-    </div>
+<!-- EX 2 -->
+<div class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">2</div>
+    <div><div class="sec-t">Listen &amp; Complete</div><div class="sec-sub">Drag the correct past tense verb to each sentence · 5 sentences</div></div>
   </div>
-
-  <!-- Exercise 2 -->
-  <div class="sec">
-    <div class="sec-hd">
-      <div class="sec-num">2</div>
-      <div>
-        <div class="sec-t">Listen &amp; Complete</div>
-        <div class="sec-sub">Drag the correct past tense verb to complete each sentence</div>
-      </div>
-    </div>
-    <div class="sec-body">
-      <div class="instr"><strong>Instructions:</strong> Listen to the audio carefully, then drag each verb from the word bank to the matching sentence. Click a placed word to return it.</div>
-      <div class="audio-wrap">
-        <button class="play-btn" onclick="toggleAudio()" id="playBtn">
-          <svg id="playIco" width="20" height="20" viewBox="0 0 20 20" fill="white"><polygon points="5,3 17,10 5,17"/></svg>
+  <div class="sec-body">
+    <div class="instr"><strong>Instructions:</strong> Press ▶ to listen. Use the slider to rewind or fast-forward. Then drag each verb from the word bank to the correct sentence blank.</div>
+    <div class="audio-player">
+      <div class="ap-top">
+        <button class="ap-btn" id="apBtn" onclick="toggleAudio()">
+          <svg id="apSvg" width="22" height="22" viewBox="0 0 22 22" fill="white">
+            <polygon points="6,3 19,11 6,19"/>
+          </svg>
         </button>
-        <div class="audio-info" style="flex:1;">
+        <div class="ap-meta">
           <p>Audio Track · 5 Sentences</p>
-          <strong>Listen carefully and fill in the blanks!</strong>
-          <div class="audio-progress"><div class="audio-prog-fill" id="apFill"></div></div>
+          <strong>Listen and fill in the blanks!</strong>
+          <div class="ap-time" id="apTime">0:00 / 0:00</div>
         </div>
-        <audio id="audioEl" src="files/audio.mp3" preload="metadata"></audio>
       </div>
-      <div class="wbank" id="wb2">
-        <div class="wbank-lbl">📦 Word Bank – Drag these verbs:</div>
-        <div class="wbank-items" id="wbItems2"></div>
+      <div class="ap-bottom">
+        <input type="range" class="ap-slider" id="apSlider" min="0" max="100" step="0.1" value="0">
       </div>
-      <div class="sent-list" id="sentList"></div>
-      <div class="btns">
-        <button class="btn btn-p" onclick="checkEx2()">✓ Check Answers</button>
-        <button class="btn btn-s" onclick="resetEx2()">↺ Reset</button>
-        <span class="sc-badge" id="sc2">Score: –</span>
-      </div>
+      <audio id="audioEl" src="files/audio.mp3" preload="metadata"></audio>
+    </div>
+    <div class="wbank">
+      <div class="wbank-lbl">📦 Word Bank:</div>
+      <div class="wbank-items" id="wbItems2"></div>
+    </div>
+    <div class="sent-list" id="sentList"></div>
+    <div class="btns">
+      <button class="btn btn-p" onclick="checkEx2()">✓ Check</button>
+      <button class="btn btn-s" onclick="resetEx2()">↺ Reset</button>
+      <span class="sc-badge" id="sc2">Score: –</span>
     </div>
   </div>
+</div>
 
-  <!-- Exercise 3 -->
-  <div class="sec">
-    <div class="sec-hd">
-      <div class="sec-num">3</div>
+<!-- EX 3 -->
+<div class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">3</div>
+    <div><div class="sec-t">Match the Verb to the Image</div><div class="sec-sub">Drag each past tense verb to its matching picture · 5 pairs</div></div>
+  </div>
+  <div class="sec-body">
+    <div class="instr"><strong>Instructions:</strong> Look at each picture and drag the correct past tense verb from the bank below. Click a placed word to return it to the bank.</div>
+    <div class="wbank orange">
+      <div class="wbank-lbl">📦 Word Bank:</div>
+      <div class="wbank-items" id="wbItems3"></div>
+    </div>
+    <div class="imgrid" id="imgGrid"></div>
+    <div class="btns">
+      <button class="btn btn-p" onclick="checkEx3()">✓ Check</button>
+      <button class="btn btn-s" onclick="resetEx3()">↺ Reset</button>
+      <span class="sc-badge" id="sc3">Score: –</span>
+    </div>
+  </div>
+</div>
+
+<!-- EX 4 -->
+<div class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">4</div>
+    <div><div class="sec-t">Multiple Choice</div><div class="sec-sub">Choose the correct past tense form · 8 questions</div></div>
+  </div>
+  <div class="sec-body">
+    <div class="instr"><strong>Instructions:</strong> Read each sentence. The verb in orange is the base form. Click the option that shows its correct past tense.</div>
+    <div class="mc-list" id="mcList"></div>
+    <div class="btns">
+      <button class="btn btn-p" onclick="checkEx4()">✓ Check</button>
+      <button class="btn btn-s" onclick="resetEx4()">↺ Reset</button>
+      <span class="sc-badge" id="sc4">Score: –</span>
+    </div>
+  </div>
+</div>
+
+<!-- EX 5 -->
+<div class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">5</div>
+    <div><div class="sec-t">My Crazy Morning – Fill the Story</div><div class="sec-sub">Type the past tense of each verb in parentheses · 6 blanks</div></div>
+  </div>
+  <div class="sec-body">
+    <div class="instr"><strong>Instructions:</strong> Complete the story by typing the <em>past tense</em> of the verb shown in orange parentheses. All verbs are irregular — no "-ed" endings!</div>
+    <div class="story-box" id="storyBox"></div>
+    <div class="btns">
+      <button class="btn btn-p" onclick="checkEx5()">✓ Check</button>
+      <button class="btn btn-s" onclick="resetEx5()">↺ Reset</button>
+      <span class="sc-badge" id="sc5">Score: –</span>
+    </div>
+  </div>
+</div>
+
+<!-- EX 6 -->
+<div class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">6</div>
+    <div><div class="sec-t">True or False?</div><div class="sec-sub">Is the underlined verb in the correct past tense? · 6 sentences</div></div>
+  </div>
+  <div class="sec-body">
+    <div class="instr"><strong>Instructions:</strong> Read each sentence. Look at the underlined verb. If it is the correct past tense form, click <strong>True</strong>. If it is wrong, click <strong>False</strong>.</div>
+    <div class="tf-list" id="tfList"></div>
+    <div class="btns">
+      <button class="btn btn-p" onclick="checkEx6()">✓ Check</button>
+      <button class="btn btn-s" onclick="resetEx6()">↺ Reset</button>
+      <span class="sc-badge" id="sc6">Score: –</span>
+    </div>
+  </div>
+</div>
+
+<!-- EX 7 -->
+<div class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">7</div>
+    <div><div class="sec-t">Connect the Pairs</div><div class="sec-sub">Click a base verb, then its past tense to match · 8 pairs</div></div>
+  </div>
+  <div class="sec-body">
+    <div class="instr"><strong>Instructions:</strong> Click a verb in the <strong>left</strong> column, then click its correct past tense in the <strong>right</strong> column. Green = correct match! Wrong pairs flash red.</div>
+    <div class="connect-wrap">
       <div>
-        <div class="sec-t">Match the Verb to the Image</div>
-        <div class="sec-sub">Drag each past tense verb to the image it matches</div>
+        <div class="connect-col-title">⬤ Base Form</div>
+        <div class="conn-items" id="connLeft"></div>
+      </div>
+      <div>
+        <div class="connect-col-title">⬤ Past Tense</div>
+        <div class="conn-items" id="connRight"></div>
       </div>
     </div>
-    <div class="sec-body">
-      <div class="instr"><strong>Instructions:</strong> Look at each image and drag the correct irregular past tense verb from the bank below to match it. Click a placed word to return it.</div>
-      <div class="wbank orange" id="wb3">
-        <div class="wbank-lbl">📦 Word Bank:</div>
-        <div class="wbank-items" id="wbItems3"></div>
-      </div>
-      <div class="imgrid" id="imgGrid"></div>
-      <div class="btns">
-        <button class="btn btn-p" onclick="checkEx3()">✓ Check Answers</button>
-        <button class="btn btn-s" onclick="resetEx3()">↺ Reset</button>
-        <span class="sc-badge" id="sc3">Score: –</span>
-      </div>
+    <div class="btns">
+      <button class="btn btn-p" onclick="checkEx7()">✓ Check All</button>
+      <button class="btn btn-s" onclick="resetEx7()">↺ Reset</button>
+      <span class="sc-badge" id="sc7">Score: –</span>
     </div>
   </div>
+</div>
 
-  <!-- Summary -->
-  <div class="summary">
-    <h2>🏆 Your Results</h2>
-    <p>Check all exercises above to update your scores</p>
-    <div class="sgrid">
-      <div class="sitem"><div class="sitem-lbl">Exercise 1<br>Unscramble</div><div class="sitem-val" id="sum1">–/10</div></div>
-      <div class="sitem"><div class="sitem-lbl">Exercise 2<br>Listen &amp; Fill</div><div class="sitem-val" id="sum2">–/5</div></div>
-      <div class="sitem"><div class="sitem-lbl">Exercise 3<br>Image Match</div><div class="sitem-val" id="sum3">–/5</div></div>
-    </div>
-    <button class="dl-btn" onclick="genPDF()" id="dlBtn">📄 Download PDF</button>
+<!-- SUMMARY -->
+<div class="summary">
+  <h2>🏆 Your Results</h2>
+  <p>Check all exercises above to update your scores, then download your PDF.</p>
+  <div class="sgrid">
+    <div class="sitem"><div class="sitem-lbl">Ex.1 Unscramble</div><div class="sitem-val" id="sum1">–</div></div>
+    <div class="sitem"><div class="sitem-lbl">Ex.2 Listen &amp; Fill</div><div class="sitem-val" id="sum2">–</div></div>
+    <div class="sitem"><div class="sitem-lbl">Ex.3 Image Match</div><div class="sitem-val" id="sum3">–</div></div>
+    <div class="sitem"><div class="sitem-lbl">Ex.4 Multiple Choice</div><div class="sitem-val" id="sum4">–</div></div>
+    <div class="sitem"><div class="sitem-lbl">Ex.5 Gap Fill Story</div><div class="sitem-val" id="sum5">–</div></div>
+    <div class="sitem"><div class="sitem-lbl">Ex.6 True or False</div><div class="sitem-val" id="sum6">–</div></div>
+    <div class="sitem" style="grid-column:1/-1"><div class="sitem-lbl">Ex.7 Connect Pairs</div><div class="sitem-val" id="sum7">–</div></div>
   </div>
+  <button class="dl-btn" onclick="genPDF()" id="dlBtn">📄 Download PDF</button>
+</div>
+
 </main>
-
 <div id="ghost"></div>
 
 <script>
-// ═══════════════════════════════════════════════════════
+// ════════════════════════════════════════
 // DATA
-// ═══════════════════════════════════════════════════════
-const VERBS = [
-  {base:'GO',   past:'WENT'},
-  {base:'EAT',  past:'ATE'},
-  {base:'HAVE', past:'HAD'},
-  {base:'DO',   past:'DID'},
-  {base:'GET',  past:'GOT'},
-  {base:'SLEEP',past:'SLEPT'},
-  {base:'DRINK',past:'DRANK'},
-  {base:'WRITE',past:'WROTE'},
-  {base:'BUY',  past:'BOUGHT'},
-  {base:'FLY',  past:'FLEW'}
+// ════════════════════════════════════════
+const VERBS=[
+  {base:'GO',past:'WENT'},{base:'EAT',past:'ATE'},{base:'HAVE',past:'HAD'},
+  {base:'DO',past:'DID'},{base:'GET',past:'GOT'},{base:'SLEEP',past:'SLEPT'},
+  {base:'DRINK',past:'DRANK'},{base:'WRITE',past:'WROTE'},
+  {base:'BUY',past:'BOUGHT'},{base:'FLY',past:'FLEW'}
+];
+const SENTENCES=[
+  {before:'I',after:'some candies for my birthday.',answer:'bought'},
+  {before:'Sara',after:'the bed yesterday.',answer:'made'},
+  {before:'I',after:'to China last year.',answer:'flew'},
+  {before:'She',after:'a book yesterday.',answer:'read'},
+  {before:'César',after:'a beautiful flower.',answer:'drew'}
+];
+const WORDS2=['bought','made','flew','read','drew'];
+const IMAGES=[
+  {img:'files/bought.jpg',answer:'bought'},
+  {img:'files/drank.jpg',answer:'drank'},
+  {img:'files/saw.png',answer:'saw'},
+  {img:'files/swam.jpg',answer:'swam'},
+  {img:'files/taught.jpg',answer:'taught'}
+];
+const WORDS3=['bought','drank','saw','swam','taught'];
+const MC=[
+  {q:'Yesterday, I ___ to the cinema.',base:'GO',opts:['goed','went','go','goes'],ans:'went'},
+  {q:'She ___ pizza for dinner last night.',base:'EAT',opts:['eated','ated','ate','eats'],ans:'ate'},
+  {q:'He ___ his homework before 6 PM.',base:'DO',opts:['done','did','does','doed'],ans:'did'},
+  {q:'They ___ really tired after the game.',base:'FEEL',opts:['feeled','felt','falled','feel'],ans:'felt'},
+  {q:'My friend ___ me a birthday present.',base:'GIVE',opts:['gaved','give','gave','given'],ans:'gave'},
+  {q:'I ___ a new book at the library.',base:'FIND',opts:['finded','fund','found','find'],ans:'found'},
+  {q:'The cat ___ on the sofa all afternoon.',base:'SLEEP',opts:['sleeped','slept','slop','sleep'],ans:'slept'},
+  {q:'She ___ to her grandmother on the phone.',base:'SPEAK',opts:['speaked','spoke','speak','spoked'],ans:'spoke'}
+];
+// story: segments with optional blank
+const STORY=[
+  {t:'Yesterday, I ',b:0,v:'WAKE',a:'woke'},
+  {t:' up very late. I quickly ',b:1,v:'EAT',a:'ate'},
+  {t:' breakfast and ',b:2,v:'DRINK',a:'drank'},
+  {t:' orange juice. Then I ',b:3,v:'RUN',a:'ran'},
+  {t:' to school. My teacher ',b:4,v:'WRITE',a:'wrote'},
+  {t:' the lesson on the board, and I ',b:5,v:'TAKE',a:'took'},
+  {t:' lots of notes. It was a great day!',b:-1}
+];
+const TF=[
+  {s:'Yesterday I <em>goed</em> to the park.',ok:false,fix:'Correct: went'},
+  {s:'She <em>ate</em> a big sandwich for lunch.',ok:true},
+  {s:'He <em>drinked</em> water after the game.',ok:false,fix:'Correct: drank'},
+  {s:'They <em>slept</em> for ten hours last night.',ok:true},
+  {s:'We <em>buyed</em> new shoes at the mall.',ok:false,fix:'Correct: bought'},
+  {s:'She <em>wrote</em> a beautiful letter to her friend.',ok:true}
+];
+const PAIRS=[
+  {base:'SEE',past:'saw'},{base:'MAKE',past:'made'},{base:'COME',past:'came'},
+  {base:'RUN',past:'ran'},{base:'TAKE',past:'took'},{base:'GIVE',past:'gave'},
+  {base:'FIND',past:'found'},{base:'KNOW',past:'knew'}
 ];
 
-const SENTENCES = [
-  {before:'I',     after:'some candies for my birthday.',answer:'bought'},
-  {before:'Sara',  after:'the bed yesterday.',           answer:'made'},
-  {before:'I',     after:'to China last year.',          answer:'flew'},
-  {before:'She',   after:'a book yesterday.',            answer:'read'},
-  {before:'César', after:'a beautiful flower.',          answer:'drew'}
-];
-const WORDS2 = ['bought','made','flew','read','drew'];
-
-const IMAGES = [
-  {img:'files/bought.jpg', answer:'bought'},
-  {img:'files/drank.jpg',  answer:'drank'},
-  {img:'files/saw.png',    answer:'saw'},
-  {img:'files/swam.jpg',   answer:'swam'},
-  {img:'files/taught.jpg', answer:'taught'}
-];
-const WORDS3 = ['bought','drank','saw','swam','taught'];
-
-// ═══════════════════════════════════════════════════════
+// ════════════════════════════════════════
 // STATE
-// ═══════════════════════════════════════════════════════
-let sc = {};   // {vi: [li...]}  — letter indices chosen
-let ss = {};   // {vi: ['S','C','R',...]} — shuffled letters
-let a2 = {};   // {si: word}
-let a3 = {};   // {ii: word}
-let s1=null,s2=null,s3=null;
+// ════════════════════════════════════════
+let sc={},ss={},a2={},a3={},a4={},a5={},a6={},a7={};
+let s1=null,s2=null,s3=null,s4=null,s5=null,s6=null,s7=null;
+let connSel=null;
+let pRightOrder=[];
 
-// ═══════════════════════════════════════════════════════
+// ════════════════════════════════════════
 // PERSIST
-// ═══════════════════════════════════════════════════════
+// ════════════════════════════════════════
 function save(){
-  localStorage.setItem('irv9',JSON.stringify({
+  localStorage.setItem('irv9b',JSON.stringify({
     name:document.getElementById('sName').value,
     date:document.getElementById('sDate').value,
-    sc,ss,a2,a3,s1,s2,s3
+    sc,ss,a2,a3,a4,a5,a6,a7,pRightOrder,s1,s2,s3,s4,s5,s6,s7
   }));
 }
 function load(){
   try{
-    const d=JSON.parse(localStorage.getItem('irv9')||'{}');
-    if(d.name) document.getElementById('sName').value=d.name;
-    if(d.date) document.getElementById('sDate').value=d.date;
-    if(d.sc)sc=d.sc; if(d.ss)ss=d.ss;
-    if(d.a2)a2=d.a2; if(d.a3)a3=d.a3;
-    if(d.s1!==undefined)s1=d.s1;
-    if(d.s2!==undefined)s2=d.s2;
-    if(d.s3!==undefined)s3=d.s3;
+    const d=JSON.parse(localStorage.getItem('irv9b')||'{}');
+    if(d.name)document.getElementById('sName').value=d.name;
+    if(d.date)document.getElementById('sDate').value=d.date;
+    sc=d.sc||{}; ss=d.ss||{};
+    a2=d.a2||{}; a3=d.a3||{};
+    a4=d.a4||{}; a5=d.a5||{};
+    a6=d.a6||{}; a7=d.a7||{};
+    if(d.pRightOrder&&d.pRightOrder.length===PAIRS.length)pRightOrder=d.pRightOrder;
+    [s1,s2,s3,s4,s5,s6,s7]=[d.s1,d.s2,d.s3,d.s4,d.s5,d.s6,d.s7].map(v=>v!==undefined?v:null);
   }catch(e){}
 }
 
 function prog(){
-  let tot=VERBS.length+SENTENCES.length+IMAGES.length,done=0;
+  const blanks=STORY.filter(p=>p.b>=0);
+  let tot=VERBS.length+SENTENCES.length+IMAGES.length+MC.length+blanks.length+TF.length+PAIRS.length;
+  let done=0;
   VERBS.forEach((_,i)=>{if((sc[i]||[]).length===VERBS[i].past.length)done++;});
   SENTENCES.forEach((_,i)=>{if(a2[i])done++;});
   IMAGES.forEach((_,i)=>{if(a3[i])done++;});
-  document.getElementById('progBar').style.width=Math.round(done/tot*100)+'%';
+  MC.forEach((_,i)=>{if(a4[i])done++;});
+  blanks.forEach(p=>{if(a5[p.b]&&a5[p.b].trim())done++;});
+  TF.forEach((_,i)=>{if(a6[i]!==undefined)done++;});
+  done+=Object.keys(a7).length;
+  const pct=Math.round(done/tot*100);
+  document.getElementById('progBar').style.width=pct+'%';
+  document.getElementById('progPct').textContent=pct+'%';
 }
 
 function summ(){
-  document.getElementById('sum1').textContent = s1!==null?`${s1}/${VERBS.length}`:'–/10';
-  document.getElementById('sum2').textContent = s2!==null?`${s2}/${SENTENCES.length}`:'–/5';
-  document.getElementById('sum3').textContent = s3!==null?`${s3}/${IMAGES.length}`:'–/5';
+  const bl=STORY.filter(p=>p.b>=0).length;
+  document.getElementById('sum1').textContent=s1!==null?`${s1}/${VERBS.length}`:`–/${VERBS.length}`;
+  document.getElementById('sum2').textContent=s2!==null?`${s2}/${SENTENCES.length}`:`–/${SENTENCES.length}`;
+  document.getElementById('sum3').textContent=s3!==null?`${s3}/${IMAGES.length}`:`–/${IMAGES.length}`;
+  document.getElementById('sum4').textContent=s4!==null?`${s4}/${MC.length}`:`–/${MC.length}`;
+  document.getElementById('sum5').textContent=s5!==null?`${s5}/${bl}`:`–/${bl}`;
+  document.getElementById('sum6').textContent=s6!==null?`${s6}/${TF.length}`:`–/${TF.length}`;
+  document.getElementById('sum7').textContent=s7!==null?`${s7}/${PAIRS.length}`:`–/${PAIRS.length}`;
 }
 
-// ═══════════════════════════════════════════════════════
-// EXERCISE 1 — LETTER ORDERING
-// ═══════════════════════════════════════════════════════
-function shuffle(a){
-  const b=[...a];
-  for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}
-  return b;
-}
+// ════════════════════════════════════════
+// EX 1 – LETTER TILES
+// ════════════════════════════════════════
+function shuf(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;}
 
 function buildEx1(){
-  const g=document.getElementById('vGrid'); g.innerHTML='';
+  const g=document.getElementById('vGrid');g.innerHTML='';
   VERBS.forEach((v,vi)=>{
-    if(!ss[vi]){
-      let sh; do{sh=shuffle(v.past.split(''));}while(sh.join('')===v.past);
-      ss[vi]=sh;
-    }
+    if(!ss[vi]){let s;do{s=shuf(v.past.split(''));}while(s.join('')===v.past);ss[vi]=s;}
     if(!sc[vi])sc[vi]=[];
     const card=document.createElement('div');
-    card.className='vcard'; card.id=`vc${vi}`;
-    card.innerHTML=`<div class="vc-lbl">Past tense of:</div>
-<div class="vc-base">${v.base}<span>→ past</span></div>
-<div class="tiles-row" id="sc${vi}"></div>
-<div class="ans-row"  id="an${vi}"></div>
-<div class="vfb"      id="fb${vi}"></div>`;
-    g.appendChild(card);
-    renderV(vi);
+    card.className='vcard';card.id=`vc${vi}`;
+    card.innerHTML=`<div class="vc-lbl">Past of:</div><div class="vc-base">${v.base}<span>→ past</span></div><div class="tiles-row" id="sc${vi}"></div><div class="ans-row" id="an${vi}"></div><div class="vfb" id="fb${vi}"></div>`;
+    g.appendChild(card);renderV(vi);
   });
 }
-
 function renderV(vi){
-  const sh=ss[vi], ans=sc[vi]||[], past=VERBS[vi].past;
-  // scrambled
-  const sEl=document.getElementById(`sc${vi}`); sEl.innerHTML='';
+  const sh=ss[vi],ans=sc[vi]||[],past=VERBS[vi].past;
+  const sEl=document.getElementById(`sc${vi}`);sEl.innerHTML='';
   sh.forEach((l,li)=>{
     const used=ans.indexOf(li)!==-1;
     const t=document.createElement('div');
-    t.className='ltile'+(used?' used':''); t.textContent=l;
-    t.onclick=()=>{
-      if(used)return;
-      sc[vi]=[...(sc[vi]||[]),li];
-      renderV(vi); save(); prog();
-      if(sc[vi].length===past.length) autoCheck1(vi);
-    };
+    t.className='ltile'+(used?' used':'');t.textContent=l;
+    t.onclick=()=>{if(used)return;sc[vi]=[...(sc[vi]||[]),li];renderV(vi);save();prog();if(sc[vi].length===past.length)autoCheck1(vi);};
     sEl.appendChild(t);
   });
-  // answer
-  const aEl=document.getElementById(`an${vi}`); aEl.innerHTML='';
+  const aEl=document.getElementById(`an${vi}`);aEl.innerHTML='';
   ans.forEach((li,pos)=>{
     const t=document.createElement('div');
-    t.className='atile'; t.textContent=sh[li];
-    t.onclick=()=>{
-      sc[vi]=sc[vi].filter((_,i)=>i!==pos);
-      document.getElementById(`fb${vi}`).textContent='';
-      document.getElementById(`fb${vi}`).className='vfb';
-      document.getElementById(`vc${vi}`).className='vcard';
-      renderV(vi); save(); prog();
-    };
+    t.className='atile';t.textContent=sh[li];
+    t.onclick=()=>{sc[vi]=sc[vi].filter((_,i)=>i!==pos);document.getElementById(`fb${vi}`).textContent='';document.getElementById(`fb${vi}`).className='vfb';document.getElementById(`vc${vi}`).className='vcard';renderV(vi);save();prog();};
     aEl.appendChild(t);
   });
 }
-
 function autoCheck1(vi){
-  const ans=sc[vi]||[], sh=ss[vi], past=VERBS[vi].past;
+  const ans=sc[vi]||[],sh=ss[vi],past=VERBS[vi].past;
   const formed=ans.map(li=>sh[li]).join('');
-  const card=document.getElementById(`vc${vi}`);
-  const fb=document.getElementById(`fb${vi}`);
+  const card=document.getElementById(`vc${vi}`),fb=document.getElementById(`fb${vi}`);
   if(formed===past){card.className='vcard correct';fb.textContent='✓ Correct!';fb.className='vfb ok';}
-  else{card.className='vcard wrong';fb.textContent=`✗ Try again`;fb.className='vfb ng';}
+  else{card.className='vcard wrong';fb.textContent='✗ Try again';fb.className='vfb ng';}
 }
-
 function checkEx1(){
   let ok=0;
   VERBS.forEach((v,vi)=>{
-    const ans=sc[vi]||[], sh=ss[vi]||v.past.split('');
+    const ans=sc[vi]||[],sh=ss[vi]||v.past.split('');
     const formed=ans.map(li=>sh[li]).join('');
-    const card=document.getElementById(`vc${vi}`), fb=document.getElementById(`fb${vi}`);
+    const card=document.getElementById(`vc${vi}`),fb=document.getElementById(`fb${vi}`);
     if(formed===v.past){ok++;card.className='vcard correct';fb.textContent='✓ Correct!';fb.className='vfb ok';}
     else{card.className='vcard wrong';fb.textContent=`✗ Answer: ${v.past}`;fb.className='vfb ng';}
   });
-  s1=ok;
-  document.getElementById('sc1').textContent=`Score: ${ok}/${VERBS.length}`;
-  summ(); save();
+  s1=ok;document.getElementById('sc1').textContent=`Score: ${ok}/${VERBS.length}`;summ();save();
 }
+function resetEx1(){sc={};ss={};s1=null;document.getElementById('sc1').textContent='Score: –';buildEx1();summ();save();}
 
-function resetEx1(){
-  sc={}; ss={}; s1=null;
-  document.getElementById('sc1').textContent='Score: –';
-  buildEx1(); summ(); save();
-}
-
-// ═══════════════════════════════════════════════════════
-// DRAG ENGINE (mouse + touch)
-// ═══════════════════════════════════════════════════════
+// ════════════════════════════════════════
+// DRAG ENGINE
+// ════════════════════════════════════════
 const ghost=document.getElementById('ghost');
-let dragWord=null, dragSrc=null, dragTimer=null;
-const ZONE=70, SPD=8;
+let dragWord=null,scrollTimer=null;
+const SZ=70,SS=9;
 
 function startScroll(cy){
-  clearInterval(dragTimer);
-  dragTimer=setInterval(()=>{
-    if(cy<ZONE) window.scrollBy(0,-SPD);
-    else if(cy>window.innerHeight-ZONE) window.scrollBy(0,SPD);
+  clearInterval(scrollTimer);
+  scrollTimer=setInterval(()=>{
+    if(cy<SZ)window.scrollBy(0,-SS);
+    else if(cy>window.innerHeight-SZ)window.scrollBy(0,SS);
   },16);
 }
-function stopScroll(){clearInterval(dragTimer);}
+function stopScroll(){clearInterval(scrollTimer);}
 
-function mkDraggable(el){
-  el.addEventListener('mousedown',dragStart);
-  el.addEventListener('touchstart',dragStart,{passive:false});
+function mkDrag(el){
+  el.addEventListener('mousedown',dStart);
+  el.addEventListener('touchstart',dStart,{passive:false});
 }
-
-function dragStart(e){
+function dStart(e){
   e.preventDefault();
   const touch=e.touches?.[0];
-  let cx=touch?touch.clientX:e.clientX, cy=touch?touch.clientY:e.clientY;
+  let cx=touch?touch.clientX:e.clientX,cy=touch?touch.clientY:e.clientY;
   dragWord=e.currentTarget.dataset.word;
-  ghost.textContent=dragWord; ghost.style.display='block';
-  ghost.style.left=(cx-45)+'px'; ghost.style.top=(cy-20)+'px';
-  e.currentTarget.classList.add('dragging');
-  const src=e.currentTarget;
-
-  const mm=e.touches?'touchmove':'mousemove';
-  const mu=e.touches?'touchend':'mouseup';
-
-  function move(ev){
-    const t=ev.touches?.[0];
-    cx=t?t.clientX:ev.clientX; cy=t?t.clientY:ev.clientY;
-    ghost.style.left=(cx-45)+'px'; ghost.style.top=(cy-20)+'px';
+  ghost.textContent=dragWord;ghost.style.display='block';
+  ghost.style.left=(cx-50)+'px';ghost.style.top=(cy-22)+'px';
+  const src=e.currentTarget;src.classList.add('dragging');
+  const mm=e.touches?'touchmove':'mousemove',mu=e.touches?'touchend':'mouseup';
+  function mv(ev){
+    const t=ev.touches?.[0];cx=t?t.clientX:ev.clientX;cy=t?t.clientY:ev.clientY;
+    ghost.style.left=(cx-50)+'px';ghost.style.top=(cy-22)+'px';
     startScroll(cy);
-    // highlight target
     document.querySelectorAll('.dzone,.idrop').forEach(z=>z.classList.remove('over'));
     const el=document.elementFromPoint(cx,cy);
     if(el){const z=el.closest('[data-ex]');if(z)z.classList.add('over');}
   }
-  function up(ev){
-    ghost.style.display='none'; stopScroll();
-    src.classList.remove('dragging');
+  function mu2(ev){
+    ghost.style.display='none';stopScroll();src.classList.remove('dragging');
     document.querySelectorAll('.dzone,.idrop').forEach(z=>z.classList.remove('over'));
     const t=ev.changedTouches?.[0];
-    const ex=t?t.clientX:ev.clientX, ey=t?t.clientY:ev.clientY;
+    const ex=t?t.clientX:ev.clientX,ey=t?t.clientY:ev.clientY;
     const el=document.elementFromPoint(ex,ey);
-    if(el){const z=el.closest('[data-ex]');if(z)drop(dragWord,z.dataset.ex,+z.dataset.idx);}
-    document.removeEventListener(mm,move);
-    document.removeEventListener(mu,up);
+    if(el){const z=el.closest('[data-ex]');if(z)dDrop(dragWord,z.dataset.ex,+z.dataset.idx);}
+    document.removeEventListener(mm,mv);document.removeEventListener(mu,mu2);
   }
-  document.addEventListener(mm,move);
-  document.addEventListener(mu,up);
+  document.addEventListener(mm,mv);document.addEventListener(mu,mu2);
+}
+function dDrop(word,ex,idx){
+  if(ex==='e2'){a2[idx]=word;buildEx2();}
+  if(ex==='e3'){a3[idx]=word;buildEx3();}
+  save();prog();
 }
 
-function drop(word,ex,idx){
-  if(ex==='e2'){a2[idx]=word; buildEx2();}
-  if(ex==='e3'){a3[idx]=word; buildEx3();}
-  save(); prog();
-}
+// ════════════════════════════════════════
+// AUDIO PLAYER
+// ════════════════════════════════════════
+const audioEl=document.getElementById('audioEl');
+const apSlider=document.getElementById('apSlider');
+let isPlaying=false,sliderDown=false;
 
-// ═══════════════════════════════════════════════════════
-// EXERCISE 2 — AUDIO DRAG
-// ═══════════════════════════════════════════════════════
+function setIcon(play){
+  document.getElementById('apSvg').innerHTML=play
+    ?'<rect x="5" y="3" width="4" height="16" rx="1.5" fill="white"/><rect x="13" y="3" width="4" height="16" rx="1.5" fill="white"/>'
+    :'<polygon points="6,3 19,11 6,19" fill="white"/>';
+}
+function fmtT(s){if(isNaN(s)||!isFinite(s))return'0:00';const m=Math.floor(s/60),sc=Math.floor(s%60);return`${m}:${sc<10?'0':''}${sc}`;}
+
+function toggleAudio(){
+  if(isPlaying){audioEl.pause();isPlaying=false;setIcon(false);}
+  else{audioEl.play().catch(()=>{});isPlaying=true;setIcon(true);}
+}
+audioEl.addEventListener('timeupdate',()=>{
+  if(!sliderDown&&audioEl.duration)apSlider.value=(audioEl.currentTime/audioEl.duration)*100;
+  document.getElementById('apTime').textContent=`${fmtT(audioEl.currentTime)} / ${fmtT(audioEl.duration)}`;
+});
+audioEl.addEventListener('ended',()=>{isPlaying=false;setIcon(false);apSlider.value=100;});
+audioEl.addEventListener('loadedmetadata',()=>{document.getElementById('apTime').textContent=`0:00 / ${fmtT(audioEl.duration)}`;});
+apSlider.addEventListener('mousedown',()=>sliderDown=true);
+apSlider.addEventListener('touchstart',()=>sliderDown=true,{passive:true});
+apSlider.addEventListener('input',()=>{if(audioEl.duration){audioEl.currentTime=(+apSlider.value/100)*audioEl.duration;document.getElementById('apTime').textContent=`${fmtT(audioEl.currentTime)} / ${fmtT(audioEl.duration)}`;}});
+apSlider.addEventListener('mouseup',()=>sliderDown=false);
+apSlider.addEventListener('touchend',()=>sliderDown=false);
+
+// ════════════════════════════════════════
+// EX 2
+// ════════════════════════════════════════
 function buildEx2(){
-  // wordbank
-  const wb=document.getElementById('wbItems2'); wb.innerHTML='';
+  const wb=document.getElementById('wbItems2');wb.innerHTML='';
   WORDS2.forEach(w=>{
     const used=Object.values(a2).includes(w);
     const el=document.createElement('div');
-    el.className='dword'+(used?' used':'');
-    el.textContent=w; el.dataset.word=w;
-    mkDraggable(el); wb.appendChild(el);
+    el.className='dword'+(used?' used':'');el.textContent=w;el.dataset.word=w;
+    if(!used)mkDrag(el);wb.appendChild(el);
   });
-  // sentences
-  const sl=document.getElementById('sentList'); sl.innerHTML='';
+  const sl=document.getElementById('sentList');sl.innerHTML='';
   SENTENCES.forEach((s,si)=>{
     const item=document.createElement('div');
-    item.className='sent-item'; item.id=`si${si}`;
-    const num=document.createElement('span'); num.className='s-num'; num.textContent=`${si+1}.`;
-    const bef=document.createElement('span'); bef.textContent=s.before+' ';
+    item.className='sent-item';item.id=`si${si}`;
+    const num=document.createElement('span');num.className='s-num';num.textContent=`${si+1}.`;
+    const bef=document.createElement('span');bef.textContent=s.before+' ';
     const dz=document.createElement('div');
     dz.className='dzone'+(a2[si]?' filled':'');
-    dz.textContent=a2[si]||'___';
-    dz.dataset.ex='e2'; dz.dataset.idx=si;
+    dz.textContent=a2[si]||'___';dz.dataset.ex='e2';dz.dataset.idx=si;
     dz.onclick=()=>{if(a2[si]){delete a2[si];buildEx2();save();prog();}};
-    const aft=document.createElement('span'); aft.textContent=' '+s.after;
-    item.append(num,bef,dz,aft);
-    sl.appendChild(item);
+    const aft=document.createElement('span');aft.textContent=' '+s.after;
+    item.append(num,bef,dz,aft);sl.appendChild(item);
   });
 }
-
 function checkEx2(){
   let ok=0;
   SENTENCES.forEach((s,si)=>{
     const item=document.getElementById(`si${si}`);
-    const dz=item.querySelector('[data-ex]');
-    const ans=a2[si]||'';
-    const good=ans===s.answer;
+    const dz=item.querySelector('.dzone');
+    const ans=a2[si]||'',good=ans===s.answer;
     if(good){ok++;item.className='sent-item correct';if(dz)dz.className='dzone filled cf';}
-    else{item.className='sent-item wrong';if(dz)dz.className='dzone filled nf';}
+    else{item.className='sent-item wrong';if(dz&&ans)dz.className='dzone filled nf';}
   });
-  s2=ok;
-  document.getElementById('sc2').textContent=`Score: ${ok}/${SENTENCES.length}`;
-  summ(); save();
+  s2=ok;document.getElementById('sc2').textContent=`Score: ${ok}/${SENTENCES.length}`;summ();save();
 }
+function resetEx2(){a2={};s2=null;document.getElementById('sc2').textContent='Score: –';buildEx2();document.querySelectorAll('.sent-item').forEach(el=>el.className='sent-item');summ();save();}
 
-function resetEx2(){
-  a2={}; s2=null;
-  document.getElementById('sc2').textContent='Score: –';
-  buildEx2();
-  document.querySelectorAll('.sent-item').forEach(el=>el.className='sent-item');
-  summ(); save();
-}
-
-// ═══════════════════════════════════════════════════════
-// EXERCISE 3 — IMAGE MATCH
-// ═══════════════════════════════════════════════════════
+// ════════════════════════════════════════
+// EX 3
+// ════════════════════════════════════════
 function buildEx3(){
-  const wb=document.getElementById('wbItems3'); wb.innerHTML='';
+  const wb=document.getElementById('wbItems3');wb.innerHTML='';
   WORDS3.forEach(w=>{
     const used=Object.values(a3).includes(w);
     const el=document.createElement('div');
-    el.className='dword'+(used?' used':'');
-    el.textContent=w; el.dataset.word=w;
-    mkDraggable(el); wb.appendChild(el);
+    el.className='dword'+(used?' used':'');el.textContent=w;el.dataset.word=w;
+    if(!used)mkDrag(el);wb.appendChild(el);
   });
-  const grid=document.getElementById('imgGrid'); grid.innerHTML='';
+  const grid=document.getElementById('imgGrid');grid.innerHTML='';
   IMAGES.forEach((im,ii)=>{
-    const card=document.createElement('div');
-    card.className='icard'; card.id=`ic${ii}`;
-    const img=document.createElement('img');
-    img.src=im.img; img.alt=im.answer;
-    img.onerror=()=>{img.style.background='#c8d5e8';img.alt='Image';};
+    const card=document.createElement('div');card.className='icard';card.id=`ic${ii}`;
+    const img=document.createElement('img');img.src=im.img;img.alt=im.answer;
+    img.onerror=()=>{img.style.background='#dde3ec';img.style.minHeight='80px';};
     const dz=document.createElement('div');
     dz.className='idrop'+(a3[ii]?' filled':'');
-    dz.textContent=a3[ii]||'Drop here';
-    dz.dataset.ex='e3'; dz.dataset.idx=ii;
+    dz.textContent=a3[ii]||'Drop here';dz.dataset.ex='e3';dz.dataset.idx=ii;
     dz.onclick=()=>{if(a3[ii]){delete a3[ii];buildEx3();save();prog();}};
-    card.append(img,dz); grid.appendChild(card);
+    card.append(img,dz);grid.appendChild(card);
   });
 }
-
 function checkEx3(){
   let ok=0;
   IMAGES.forEach((im,ii)=>{
     const card=document.getElementById(`ic${ii}`);
-    const dz=card.querySelector('[data-ex]');
-    const ans=a3[ii]||'';
-    const good=ans===im.answer;
+    const dz=card.querySelector('.idrop');
+    const ans=a3[ii]||'',good=ans===im.answer;
     if(good){ok++;card.className='icard correct';if(dz)dz.className='idrop filled cf';}
-    else{card.className='icard wrong';if(dz)dz.className='idrop filled nf';}
+    else{card.className='icard wrong';if(dz&&ans)dz.className='idrop filled nf';}
   });
-  s3=ok;
-  document.getElementById('sc3').textContent=`Score: ${ok}/${IMAGES.length}`;
-  summ(); save();
+  s3=ok;document.getElementById('sc3').textContent=`Score: ${ok}/${IMAGES.length}`;summ();save();
 }
+function resetEx3(){a3={};s3=null;document.getElementById('sc3').textContent='Score: –';buildEx3();IMAGES.forEach((_,ii)=>document.getElementById(`ic${ii}`).className='icard');summ();save();}
 
-function resetEx3(){
-  a3={}; s3=null;
-  document.getElementById('sc3').textContent='Score: –';
-  buildEx3();
-  IMAGES.forEach((_,ii)=>document.getElementById(`ic${ii}`).className='icard');
-  summ(); save();
+// ════════════════════════════════════════
+// EX 4 – MULTIPLE CHOICE
+// ════════════════════════════════════════
+function buildEx4(){
+  const list=document.getElementById('mcList');list.innerHTML='';
+  MC.forEach((q,qi)=>{
+    const item=document.createElement('div');
+    item.className='mc-item';item.id=`mc${qi}`;
+    const ql=document.createElement('div');ql.className='mc-q';
+    ql.innerHTML=`${qi+1}. `+q.q.replace('___',`<span>[${q.base}]</span>`);
+    const opts=document.createElement('div');opts.className='mc-opts';
+    q.opts.forEach(opt=>{
+      const btn=document.createElement('div');
+      btn.className='mc-opt'+(a4[qi]===opt?' selected':'');
+      btn.textContent=opt;
+      btn.onclick=()=>{a4[qi]=opt;buildEx4();save();prog();};
+      opts.appendChild(btn);
+    });
+    item.append(ql,opts);list.appendChild(item);
+  });
 }
+function checkEx4(){
+  let ok=0;
+  MC.forEach((q,qi)=>{
+    const item=document.getElementById(`mc${qi}`);
+    const chosen=a4[qi]||'',good=chosen===q.ans;
+    if(chosen&&good)ok++;
+    item.className='mc-item'+(good&&chosen?' correct':chosen?' wrong':'');
+    item.querySelectorAll('.mc-opt').forEach(btn=>{
+      const v=btn.textContent;
+      btn.className='mc-opt';
+      if(v===q.ans)btn.classList.add('ok');
+      else if(v===chosen&&!good)btn.classList.add('ng');
+    });
+  });
+  s4=ok;document.getElementById('sc4').textContent=`Score: ${ok}/${MC.length}`;summ();save();
+}
+function resetEx4(){a4={};s4=null;document.getElementById('sc4').textContent='Score: –';buildEx4();summ();save();}
 
-// ═══════════════════════════════════════════════════════
-// AUDIO
-// ═══════════════════════════════════════════════════════
-let playing=false;
-const audioEl=document.getElementById('audioEl');
-function toggleAudio(){
-  if(playing){audioEl.pause();setPlayIcon(false);}
-  else{audioEl.play().catch(()=>{});setPlayIcon(true);}
-  playing=!playing;
+// ════════════════════════════════════════
+// EX 5 – GAP FILL STORY
+// ════════════════════════════════════════
+function buildEx5(){
+  const box=document.getElementById('storyBox');box.innerHTML='';
+  STORY.forEach(part=>{
+    box.insertAdjacentText('beforeend',part.t);
+    if(part.b>=0){
+      const hint=document.createElement('span');
+      hint.className='hint';hint.textContent=`(${part.v}) `;
+      const inp=document.createElement('input');
+      inp.type='text';inp.className='gap-input';inp.id=`gap${part.b}`;
+      inp.placeholder='…';inp.value=a5[part.b]||'';
+      inp.autocomplete='off';inp.spellcheck=false;
+      inp.oninput=e=>{a5[part.b]=e.target.value.trim().toLowerCase();save();prog();};
+      box.appendChild(hint);box.appendChild(inp);
+    }
+  });
 }
-audioEl.ontimeupdate=()=>{
-  if(audioEl.duration){
-    document.getElementById('apFill').style.width=(audioEl.currentTime/audioEl.duration*100)+'%';
+function checkEx5(){
+  let ok=0;
+  STORY.filter(p=>p.b>=0).forEach(part=>{
+    const inp=document.getElementById(`gap${part.b}`);if(!inp)return;
+    const val=(inp.value||'').trim().toLowerCase();
+    if(val===part.a){ok++;inp.className='gap-input ok';}
+    else{inp.className='gap-input ng';if(!val)inp.placeholder=part.a;}
+  });
+  s5=ok;
+  const bl=STORY.filter(p=>p.b>=0).length;
+  document.getElementById('sc5').textContent=`Score: ${ok}/${bl}`;summ();save();
+}
+function resetEx5(){a5={};s5=null;document.getElementById('sc5').textContent='Score: –';buildEx5();summ();save();}
+
+// ════════════════════════════════════════
+// EX 6 – TRUE OR FALSE
+// ════════════════════════════════════════
+function buildEx6(){
+  const list=document.getElementById('tfList');list.innerHTML='';
+  TF.forEach((item,ii)=>{
+    const row=document.createElement('div');row.className='tf-item';row.id=`tf${ii}`;
+    const tr=document.createElement('div');tr.className='tf-row';
+    const sent=document.createElement('div');
+    sent.className='tf-sent';sent.innerHTML=`${ii+1}. &ldquo;${item.s}&rdquo;`;
+    const btns=document.createElement('div');btns.className='tf-btns';
+    ['T','F'].forEach(v=>{
+      const btn=document.createElement('button');
+      btn.className='tf-btn'+(a6[ii]===v?' sel':'');
+      btn.textContent=v==='T'?'✓ True':'✗ False';btn.dataset.v=v;
+      btn.onclick=()=>{a6[ii]=v;buildEx6();save();prog();};
+      btns.appendChild(btn);
+    });
+    tr.append(sent,btns);
+    const corr=document.createElement('div');
+    corr.className='tf-correction';corr.id=`tfc${ii}`;
+    if(item.fix)corr.textContent='💡 '+item.fix;
+    row.append(tr,corr);list.appendChild(row);
+  });
+}
+function checkEx6(){
+  let ok=0;
+  TF.forEach((item,ii)=>{
+    const row=document.getElementById(`tf${ii}`);
+    const chosen=a6[ii],ans=item.ok?'T':'F',good=chosen===ans;
+    if(chosen&&good)ok++;
+    row.className='tf-item'+(good&&chosen?' correct':chosen?' wrong':'');
+    row.querySelectorAll('.tf-btn').forEach(btn=>{
+      const v=btn.dataset.v;
+      btn.className='tf-btn';
+      if(v===ans)btn.classList.add('ok');
+      else if(v===chosen&&!good)btn.classList.add('ng');
+    });
+    const corr=document.getElementById(`tfc${ii}`);
+    if(corr&&!item.ok)corr.className='tf-correction show';
+  });
+  s6=ok;document.getElementById('sc6').textContent=`Score: ${ok}/${TF.length}`;summ();save();
+}
+function resetEx6(){a6={};s6=null;document.getElementById('sc6').textContent='Score: –';buildEx6();summ();save();}
+
+// ════════════════════════════════════════
+// EX 7 – CONNECT MATCH
+// ════════════════════════════════════════
+function buildEx7(){
+  if(!pRightOrder.length)pRightOrder=shuf([...Array(PAIRS.length).keys()]);
+  const left=document.getElementById('connLeft'),right=document.getElementById('connRight');
+  left.innerHTML='';right.innerHTML='';
+  PAIRS.forEach((p,bi)=>{
+    const matched=Object.entries(a7).some(([b,ri])=>+b===bi);
+    const card=document.createElement('div');
+    card.className='conn-card'+(connSel===`L${bi}`?' selected':'')+(matched?' matched':'');
+    card.textContent=p.base;card.id=`cl${bi}`;
+    if(!matched)card.onclick=()=>connClick('L',bi);
+    left.appendChild(card);
+  });
+  pRightOrder.forEach((origIdx,di)=>{
+    const matched=Object.values(a7).includes(di);
+    const card=document.createElement('div');
+    card.className='conn-card'+(connSel===`R${di}`?' selected':'')+(matched?' matched':'');
+    card.textContent=PAIRS[origIdx].past;card.id=`cr${di}`;
+    if(!matched)card.onclick=()=>connClick('R',di);
+    right.appendChild(card);
+  });
+}
+function connClick(side,idx){
+  if(!connSel){connSel=`${side}${idx}`;buildEx7();return;}
+  const selSide=connSel[0],selIdx=+connSel.slice(1);
+  if(selSide===side){connSel=`${side}${idx}`;buildEx7();return;}
+  const li=side==='R'?selIdx:idx,ri=side==='R'?idx:selIdx;
+  const origPast=PAIRS[pRightOrder[ri]].past;
+  const correct=PAIRS[li].past===origPast;
+  connSel=null;
+  if(correct){
+    a7[li]=ri;buildEx7();save();prog();
+    if(Object.keys(a7).length===PAIRS.length){s7=PAIRS.length;document.getElementById('sc7').textContent=`Score: ${PAIRS.length}/${PAIRS.length}`;summ();save();}
+  } else {
+    const cl=document.getElementById(`cl${li}`),cr=document.getElementById(`cr${ri}`);
+    [cl,cr].forEach(c=>{if(c){c.classList.add('wrong-flash');setTimeout(()=>{c.classList.remove('wrong-flash');buildEx7();},400);}});
   }
-};
-audioEl.onended=()=>{playing=false;setPlayIcon(false);document.getElementById('apFill').style.width='100%';};
-function setPlayIcon(p){
-  document.getElementById('playIco').outerHTML=p
-    ?'<g id="playIco"><rect x="4" y="3" width="4" height="14" rx="1" fill="white"/><rect x="12" y="3" width="4" height="14" rx="1" fill="white"/></g>'
-    :'<polygon id="playIco" points="5,3 17,10 5,17" fill="white"/>';
+}
+function checkEx7(){
+  let ok=Object.keys(a7).length;
+  s7=ok;document.getElementById('sc7').textContent=`Score: ${ok}/${PAIRS.length}`;summ();save();
+}
+function resetEx7(){a7={};s7=null;connSel=null;pRightOrder=[];document.getElementById('sc7').textContent='Score: –';buildEx7();summ();save();}
+
+// ════════════════════════════════════════
+// GRADE
+// ════════════════════════════════════════
+function computeGrade(){
+  const bl=STORY.filter(p=>p.b>=0).length;
+  const tot=VERBS.length+SENTENCES.length+IMAGES.length+MC.length+bl+TF.length+PAIRS.length;
+  const c1=s1??0,c2=s2??0,c3=s3??0,c4=s4??0,c5=s5??0,c6=s6??0,c7=s7??0;
+  const cor=c1+c2+c3+c4+c5+c6+c7;
+  const g=parseFloat((cor/tot*9+1).toFixed(2));
+  return{c1,c2,c3,c4,c5,c6,c7,cor,tot,g,bl};
 }
 
-// ═══════════════════════════════════════════════════════
+// ════════════════════════════════════════
 // PDF
-// ═══════════════════════════════════════════════════════
-function grade(){
-  const c1=s1??0, c2=s2??0, c3=s3??0;
-  const tot=VERBS.length+SENTENCES.length+IMAGES.length;
-  const cor=c1+c2+c3;
-  const g=(cor/tot*9+1).toFixed(2);
-  return{c1,c2,c3,cor,tot,g};
-}
-
+// ════════════════════════════════════════
 function genPDF(){
   const btn=document.getElementById('dlBtn');
-  btn.disabled=true; btn.textContent='⏳ Generating…';
-  setTimeout(()=>{
-    try{buildPDF();}catch(e){console.error(e);}
-    btn.disabled=false; btn.innerHTML='📄 Download PDF';
-  },80);
+  btn.disabled=true;btn.textContent='⏳ Generating…';
+  setTimeout(()=>{try{buildPDF();}catch(e){console.error(e);}btn.disabled=false;btn.innerHTML='📄 Download PDF';},100);
 }
 
 function buildPDF(){
-  const {jsPDF}=window.jspdf;
+  const{jsPDF}=window.jspdf;
   const doc=new jsPDF({orientation:'p',unit:'mm',format:'a4'});
-  const W=210,H=297,m=18;
-  let y=0;
-  const np=()=>{doc.addPage();y=m;};
-  const ck=(n=10)=>{if(y+n>H-20)np();};
+  const W=210,H=297,m=16;
+  let y=m;
+  const ck=(n=12)=>{if(y+n>H-16){doc.addPage();y=m;}};
 
-  // ── header
-  doc.setFillColor(26,39,68); doc.rect(0,0,W,40,'F');
-  doc.setFillColor(232,118,26); doc.rect(0,40,W,5,'F');
-  doc.setFillColor(42,191,191); doc.rect(0,45,W,2,'F');
-  doc.setTextColor(255,255,255);
-  doc.setFont('helvetica','bold'); doc.setFontSize(20);
-  doc.text('Irregular Verbs Worksheet',m,16);
-  doc.setFontSize(10); doc.setFont('helvetica','normal');
-  doc.text('English A1+  ·  9th Grade  ·  Sección A  ·  COEDUCA',m,24);
-  doc.text('Teacher: Prof. José Eliseo Martínez',m,31);
-  // decorative circle
-  doc.setFillColor(255,255,255,0.06);
-  doc.circle(185,15,18,'F');
-
-  y=55;
-  // student box
-  const name=document.getElementById('sName').value||'_____________________';
-  const date=document.getElementById('sDate').value||'__________';
-  doc.setFillColor(255,248,240); doc.setDrawColor(232,118,26); doc.setLineWidth(.6);
-  doc.roundedRect(m,y,W-m*2,20,3,3,'FD');
-  doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(10);
-  doc.text(`Student: ${name}`,m+5,y+8);
-  doc.text(`Date: ${date}`,m+5,y+15);
-  y+=28;
-
-  // ── EX1
   const secHd=(title)=>{
     ck(16);
     doc.setFillColor(232,118,26);
     doc.roundedRect(m,y,W-m*2,13,2,2,'F');
-    doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(11);
-    doc.text(title,m+5,y+9);
-    y+=18;
+    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(10.5);
+    doc.text(title,m+5,y+9);y+=17;
   };
-  secHd('Exercise 1 – Unscramble the Irregular Verbs');
-
-  // table header
-  doc.setFillColor(242,244,250); doc.rect(m,y,W-m*2,8,'F');
-  doc.setTextColor(100,110,130); doc.setFont('helvetica','bold'); doc.setFontSize(8);
-  doc.text('BASE VERB',m+4,y+5.5);
-  doc.text('EXPECTED (Past)',m+55,y+5.5);
-  doc.text('STUDENT WROTE',m+118,y+5.5);
-  doc.text('✓/✗',W-m-12,y+5.5);
-  y+=9;
-
-  VERBS.forEach((v,vi)=>{
-    ck(10);
-    const ans=(sc[vi]||[]), sh=(ss[vi]||v.past.split(''));
-    const formed=ans.map(li=>sh[li]).join('');
-    const ok=formed===v.past;
-    const bg=formed.length>0?(ok?[240,253,244]:[254,242,242]):[255,255,255];
-    doc.setFillColor(...bg); doc.rect(m,y,W-m*2,9,'F');
-    doc.setDrawColor(220,220,220); doc.setLineWidth(.3);
-    doc.rect(m,y,W-m*2,9,'S');
-    doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(9.5);
-    doc.text(v.base,m+4,y+6.5);
-    doc.setFont('helvetica','normal');
-    doc.text(v.past,m+55,y+6.5);
-    doc.text(formed||'—',m+118,y+6.5);
-    if(formed.length===v.past.length){
-      doc.setTextColor(ok?34:239,ok?197:68,ok?94:68);
-      doc.setFont('helvetica','bold');
-      doc.text(ok?'✓':'✗',W-m-9,y+6.5);
+  const trow=(label,val,ok)=>{
+    ck(9);
+    const bg=ok===true?[240,253,244]:ok===false?[254,242,242]:[255,255,255];
+    doc.setFillColor(...bg);doc.rect(m,y,W-m*2,9,'F');
+    doc.setDrawColor(220,222,228);doc.setLineWidth(.25);doc.rect(m,y,W-m*2,9,'S');
+    doc.setTextColor(26,39,68);doc.setFont('helvetica','normal');doc.setFontSize(9);
+    const lbl=label.length>70?label.slice(0,70)+'…':label;
+    doc.text(lbl,m+3,y+6.2);
+    if(val!==undefined&&val!==null){doc.setFont('helvetica','bold');doc.text(String(val),m+125,y+6.2);}
+    if(ok!==null&&ok!==undefined){
+      doc.setTextColor(ok?34:220,ok?160:50,ok?100:50);
+      doc.setFont('helvetica','bold');doc.setFontSize(11);
+      doc.text(ok?'✓':'✗',W-m-6,y+6.5);
     }
     y+=9;
-  });
-  y+=4;
-  doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(10);
-  doc.text(`Exercise 1 Score: ${s1??0} / ${VERBS.length}`,m,y);
-  y+=14;
+  };
 
-  // ── EX2
-  secHd('Exercise 2 – Listen & Complete');
+  // Header
+  doc.setFillColor(26,39,68);doc.rect(0,0,W,46,'F');
+  doc.setFillColor(232,118,26);doc.rect(0,46,W,5,'F');
+  doc.setFillColor(42,191,191);doc.rect(0,51,W,2,'F');
+  doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(22);
+  doc.text('Irregular Verbs Worksheet',m,17);
+  doc.setFontSize(10);doc.setFont('helvetica','normal');
+  doc.text('English A1+  ·  9th Grade  ·  Sección A  ·  COEDUCA',m,26);
+  doc.text('Teacher: Prof. José Eliseo Martínez',m,34);
+  y=59;
+
+  // Student box
+  const nm=document.getElementById('sName').value||'____________________________';
+  const dt=document.getElementById('sDate').value||'__________';
+  doc.setFillColor(255,248,240);doc.setDrawColor(232,118,26);doc.setLineWidth(.7);
+  doc.roundedRect(m,y,W-m*2,21,3,3,'FD');
+  doc.setTextColor(26,39,68);doc.setFont('helvetica','bold');doc.setFontSize(10.5);
+  doc.text(`Student:  ${nm}`,m+5,y+9);doc.text(`Date:  ${dt}`,m+5,y+16);
+  y+=28;
+
+  // EX1
+  secHd(`Exercise 1 – Unscramble the Irregular Verbs  (${VERBS.length} pts)`);
+  VERBS.forEach((v,vi)=>{
+    const ans=(sc[vi]||[]),sh=(ss[vi]||v.past.split(''));
+    const formed=ans.map(li=>sh[li]).join('');
+    trow(`${v.base}  →  expected: ${v.past}`,formed||'—',formed.length===v.past.length?formed===v.past:null);
+  });
+  ck(8);doc.setTextColor(26,39,68);doc.setFont('helvetica','bold');doc.setFontSize(9.5);
+  doc.text(`Exercise 1 Score: ${s1??0} / ${VERBS.length}`,m,y);y+=13;
+
+  // EX2
+  secHd(`Exercise 2 – Listen & Complete  (${SENTENCES.length} pts)`);
   SENTENCES.forEach((s,si)=>{
-    ck(16);
     const ans=a2[si]||'';
-    const ok=ans===s.answer;
-    const bg=ans?(ok?[240,253,244]:[254,242,242]):[255,255,255];
-    doc.setFillColor(...bg); doc.setDrawColor(220,220,220); doc.setLineWidth(.3);
-    doc.roundedRect(m,y,W-m*2,13,2,2,'FD');
-    const txt=`${s.before} [${ans||'     '}] ${s.after}`;
-    doc.setTextColor(26,39,68); doc.setFont('helvetica','normal'); doc.setFontSize(10.5);
-    doc.text(`${si+1}.  ${txt}`,m+4,y+9);
-    if(ans){doc.setTextColor(ok?34:239,ok?197:68,ok?94:68);doc.setFont('helvetica','bold');doc.setFontSize(12);doc.text(ok?'✓':'✗',W-m-7,y+9);}
-    y+=16;
+    trow(`${si+1}. ${s.before} [___] ${s.after}`,ans||'—',ans?ans===s.answer:null);
   });
-  y+=2;
-  doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(10);
-  doc.text(`Exercise 2 Score: ${s2??0} / ${SENTENCES.length}`,m,y);
-  y+=14;
+  ck(8);doc.setTextColor(26,39,68);doc.setFont('helvetica','bold');doc.setFontSize(9.5);
+  doc.text(`Exercise 2 Score: ${s2??0} / ${SENTENCES.length}`,m,y);y+=13;
 
-  // ── EX3
-  secHd('Exercise 3 – Match the Verb to the Image');
+  // EX3
+  secHd(`Exercise 3 – Match Verb to Image  (${IMAGES.length} pts)`);
   IMAGES.forEach((im,ii)=>{
-    ck(14);
     const ans=a3[ii]||'';
-    const ok=ans===im.answer;
-    const bg=ans?(ok?[240,253,244]:[254,242,242]):[255,255,255];
-    doc.setFillColor(...bg); doc.setDrawColor(220,220,220); doc.setLineWidth(.3);
-    doc.roundedRect(m,y,W-m*2,12,2,2,'FD');
-    doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(9.5);
-    doc.text(`${ii+1}.  Image (${im.answer.toUpperCase()})`,m+4,y+5);
-    doc.setFont('helvetica','normal');
-    doc.text(`Student wrote: ${ans||'—'}`,m+4,y+10);
-    if(ans){doc.setTextColor(ok?34:239,ok?197:68,ok?94:68);doc.setFont('helvetica','bold');doc.setFontSize(12);doc.text(ok?'✓':'✗',W-m-7,y+9);}
-    y+=15;
+    trow(`Image ${ii+1}  (answer: ${im.answer})`,ans||'—',ans?ans===im.answer:null);
   });
-  y+=2;
-  doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(10);
-  doc.text(`Exercise 3 Score: ${s3??0} / ${IMAGES.length}`,m,y);
-  y+=16;
+  ck(8);doc.setTextColor(26,39,68);doc.setFont('helvetica','bold');doc.setFontSize(9.5);
+  doc.text(`Exercise 3 Score: ${s3??0} / ${IMAGES.length}`,m,y);y+=13;
 
-  // ── SUMMARY BOX
-  ck(36);
-  doc.setFillColor(245,248,255); doc.setDrawColor(42,191,191); doc.setLineWidth(.8);
-  doc.roundedRect(m,y,W-m*2,32,4,4,'FD');
-  doc.setLineWidth(.2);
-  doc.setTextColor(26,39,68); doc.setFont('helvetica','bold'); doc.setFontSize(13);
-  doc.text('Results Summary',m+5,y+10);
-  doc.setFontSize(10); doc.setFont('helvetica','normal');
-  const {c1,c2,c3,cor,tot}=grade();
-  const col=W-m*2-10;
-  doc.text(`Ex. 1 (Unscramble):  ${c1} / ${VERBS.length}`,m+5,y+20);
-  doc.text(`Ex. 2 (Listen & Fill):  ${c2} / ${SENTENCES.length}`,m+5+(col/3),y+20);
-  doc.text(`Ex. 3 (Image Match):  ${c3} / ${IMAGES.length}`,m+5+(col*2/3),y+20);
-  doc.setFont('helvetica','bold');
-  doc.text(`Total Correct: ${cor} out of ${tot}`,m+5,y+28);
-  y+=38;
+  // EX4
+  secHd(`Exercise 4 – Multiple Choice  (${MC.length} pts)`);
+  MC.forEach((q,qi)=>{
+    const ans=a4[qi]||'';
+    trow(`${qi+1}. ${q.q}  [${q.base}]  → correct: ${q.ans}`,ans||'—',ans?ans===q.ans:null);
+  });
+  ck(8);doc.setTextColor(26,39,68);doc.setFont('helvetica','bold');doc.setFontSize(9.5);
+  doc.text(`Exercise 4 Score: ${s4??0} / ${MC.length}`,m,y);y+=13;
 
-  // ── FOOTER (grade hidden here)
-  const {g}=grade();
+  // EX5
+  const blk=STORY.filter(p=>p.b>=0);
+  secHd(`Exercise 5 – Gap Fill Story  (${blk.length} pts)`);
+  blk.forEach((part,idx)=>{
+    const ans=a5[part.b]||'';
+    trow(`Blank ${idx+1}  (${part.v})  → expected: ${part.a}`,ans||'—',ans?ans===part.a:null);
+  });
+  ck(8);doc.setTextColor(26,39,68);doc.setFont('helvetica','bold');doc.setFontSize(9.5);
+  doc.text(`Exercise 5 Score: ${s5??0} / ${blk.length}`,m,y);y+=13;
+
+  // EX6
+  secHd(`Exercise 6 – True or False  (${TF.length} pts)`);
+  TF.forEach((item,ii)=>{
+    const ans=a6[ii],correct=item.ok?'T':'F';
+    const clean=item.s.replace(/<[^>]+>/g,'');
+    trow(`${ii+1}. "${clean}"  → ${item.ok?'TRUE':'FALSE'}`,ans?`Answered: ${ans==='T'?'True':'False'}`:'—',ans!==undefined?ans===correct:null);
+  });
+  ck(8);doc.setTextColor(26,39,68);doc.setFont('helvetica','bold');doc.setFontSize(9.5);
+  doc.text(`Exercise 6 Score: ${s6??0} / ${TF.length}`,m,y);y+=13;
+
+  // EX7
+  secHd(`Exercise 7 – Connect the Pairs  (${PAIRS.length} pts)`);
+  PAIRS.forEach((p,bi)=>{
+    const matched=a7[bi]!==undefined;
+    const sp=matched?PAIRS[pRightOrder[a7[bi]]].past:'—';
+    trow(`${p.base}  →  expected: ${p.past}`,sp,matched?sp===p.past:null);
+  });
+  ck(8);doc.setTextColor(26,39,68);doc.setFont('helvetica','bold');doc.setFontSize(9.5);
+  doc.text(`Exercise 7 Score: ${s7??0} / ${PAIRS.length}`,m,y);y+=16;
+
+  // Summary box
+  const{c1,c2,c3,c4,c5,c6,c7,cor,tot}=computeGrade();
+  ck(46);
+  doc.setFillColor(244,248,255);doc.setDrawColor(42,191,191);doc.setLineWidth(.8);
+  doc.roundedRect(m,y,W-m*2,42,4,4,'FD');
+  doc.setTextColor(26,39,68);doc.setFont('helvetica','bold');doc.setFontSize(13);
+  doc.text('Results Summary',m+5,y+11);
+  doc.setFont('helvetica','normal');doc.setFontSize(9.5);
+  const bx=m+5,by=y+21,gp=(W-m*2-10)/4;
+  doc.text(`Ex.1: ${c1}/${VERBS.length}`,bx,by);
+  doc.text(`Ex.2: ${c2}/${SENTENCES.length}`,bx+gp,by);
+  doc.text(`Ex.3: ${c3}/${IMAGES.length}`,bx+gp*2,by);
+  doc.text(`Ex.4: ${c4}/${MC.length}`,bx+gp*3,by);
+  doc.text(`Ex.5: ${c5}/${blk.length}`,bx,by+9);
+  doc.text(`Ex.6: ${c6}/${TF.length}`,bx+gp,by+9);
+  doc.text(`Ex.7: ${c7}/${PAIRS.length}`,bx+gp*2,by+9);
+  doc.setFont('helvetica','bold');doc.setFontSize(11);
+  doc.text(`Total correct: ${cor} / ${tot}`,bx,by+20);
+  y+=50;
+
+  // Footers (grade discreetly hidden)
+  const{g}=computeGrade();
   const pages=doc.internal.getNumberOfPages();
   for(let p=1;p<=pages;p++){
     doc.setPage(p);
-    doc.setFillColor(26,39,68); doc.rect(0,H-14,W,14,'F');
-    doc.setTextColor(160,175,200); doc.setFont('helvetica','normal'); doc.setFontSize(8);
-    doc.text(`COEDUCA · English A1+ · 9th Grade · Sección A · Prof. José Eliseo Martínez`,m,H-5.5);
-    doc.setTextColor(100,115,145); doc.setFontSize(7);
-    doc.text(`${cor}/${tot} correct  |  Grade: ${g}/10`,W-m-38,H-5.5);
+    doc.setFillColor(26,39,68);doc.rect(0,H-12,W,12,'F');
+    doc.setFillColor(232,118,26);doc.rect(0,H-13,W,.8,'F');
+    doc.setTextColor(140,160,195);doc.setFont('helvetica','normal');doc.setFontSize(7.5);
+    doc.text('COEDUCA · English A1+ · 9th Grade · Sección A · Prof. José Eliseo Martínez',m,H-4.5);
+    doc.setTextColor(70,85,110);doc.setFontSize(6);
+    doc.text(`${cor}/${tot} | ${g}/10`,W-m-16,H-4.5);
   }
 
   const fn=`Irregular_Verbs_${(document.getElementById('sName').value||'Student').replace(/\s+/g,'_')}.pdf`;
   doc.save(fn);
 }
 
-// ═══════════════════════════════════════════════════════
+// ════════════════════════════════════════
 // BOOT
-// ═══════════════════════════════════════════════════════
+// ════════════════════════════════════════
 window.addEventListener('DOMContentLoaded',()=>{
   load();
-  buildEx1(); buildEx2(); buildEx3();
-  summ(); prog();
+  buildEx1();buildEx2();buildEx3();buildEx4();buildEx5();buildEx6();buildEx7();
+  summ();prog();
   if(!document.getElementById('sDate').value){
-    document.getElementById('sDate').value=new Date().toISOString().split('T')[0];
-    save();
+    document.getElementById('sDate').value=new Date().toISOString().split('T')[0];save();
   }
 });
 </script>
